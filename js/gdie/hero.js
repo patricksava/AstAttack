@@ -12,6 +12,9 @@
     var direction = "right";
     var statesMachine = new StateMachine({
       start: "standing",
+      timedTransitions: {
+        "zigzag": [{"30s": "moveRight"}, {"30s": "moveLeft"}]
+      },
       states: {
         "running" : {
           action: function() {
@@ -24,7 +27,6 @@
           transitions: {
             "falling": "falling-moving",
             "stop": "standing",
-            "jump": "jumping-moving",
             "moveLeft": "running",
             "moveRight": "running"
           }
@@ -37,98 +39,21 @@
             "falling": "falling-still",
             "moveLeft": "running",
             "moveRight": "running",
-            "jump": "jumping-still"
-          }
-        },
-        "jumping-moving" : {
-          action: function() {
-            physic.noForces();
-            var upImpulse = 0.7;
-            var frontImpulse = 4;
-            if(direction === "right") {
-              physic.force(frontImpulse, upImpulse);
-            } else {
-              physic.force(-1*frontImpulse, upImpulse);
-            }
-          },
-          immediateTransition: "on-the-air-moving"
-        },
-        "jumping-still" : {
-          action: function() {
-            physic.noForces();
-            var upImpulse = 0.8;
-            physic.force(0, upImpulse);
-          },
-          immediateTransition: "on-the-air-still"
-        },
-        "on-the-air-still" : {
-          action: function() {
-            physic.velocityX(0);
-          },
-          transitions: {
-            "falling": "falling-still",
-            "fall": "falling-still",
-            "moveRight": "on-the-air-moving",
-            "moveLeft": "on-the-air-moving",
-            "land": "standing"
-          }
-        },
-        "on-the-air-moving" : {
-          action: function() {
-            if(direction === "right") {
-              physic.velocityX(JUMPING_VEL);
-            } else {
-              physic.velocityX(-1*JUMPING_VEL);
-            }
-          },
-          transitions: {
-            "falling": "falling-moving",
-            "fall": "falling-still",
-            "stop": "on-the-air-still",
-            "land": "running",
-            "moveLeft": "on-the-air-moving",
-            "moveRight": "on-the-air-moving"
-          }
-        },
-        "falling-still": {
-          action: "on-the-air-still",
-          transitions: {
-            "moveRight": "falling-moving",
-            "moveLeft": "falling-moving",
-            "land": "standing"
-          }
-        },
-        "falling-moving": {
-          action: "on-the-air-moving",
-          transitions: {
-            "stop": "falling-still",
-            "land": "running",
-            "moveLeft": "falling-moving",
-            "moveRight": "falling-moving"
           }
         }
       },
           
       passiveTransitions: [
-        "stop", "land"
+        "stop"
       ],
       
       activeTransitions: {
         "moveRight": function() { direction = "right"; },
-        "moveLeft": function() { direction = "left"; },
-        "land": function() { physic.noForces(); },
-        "fall" : function() { physic.force(0, -0.3); }
+        "moveLeft": function() { direction = "left"; }
       }
     });
 
     this.init = function() {
-      physic.listen("blockedBottom", function() {
-        statesMachine.applyTransition("land");
-      });
-      physic.listen("falling", function() {
-        statesMachine.applyTransition("falling");
-      });
-
       statesMachine.listen("stateChange", function(newState, transition, previousState) {
         callbacks.emit("stateChange", [newState, direction]);
       });

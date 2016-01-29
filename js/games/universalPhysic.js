@@ -7,14 +7,12 @@
 
     this.push = function(obj) {
       objects.push(obj);
-      obj.emitOnUniverse();
       callbacks.emit("objectPushed", obj);
     };
 
     this.update = function() {
       for(var i = 0; i < objects.length; i++) {
         objects[i].update();
-        applyTo(objects[i]);
       }
 
       for(var i = 0; i < objects.length-1; i++) {
@@ -28,7 +26,6 @@
       for(var i = 0; i < objects.length; i++) {
         objects[i].verifyFalling();
         objects[i].emitUpdated();
-        callbacks.emit("objectUpdated", objects[i]);
       }
     };
 
@@ -60,18 +57,5 @@
         weak.emitBlockedTop(fixed);
       }
     }
-
-    function applyTo(obj) {
-      if(obj.type !== "fixed") {
-        var gravity = -0.05;
-        var horizontalResistence = 0.03;
-        if(obj.vel.y > -10) {
-          obj.force(0, gravity);
-        } else {
-          obj.forceToZero(0, 10);
-        }
-        obj.forceToZero(0.03, 0);
-      }
-    };
   };
 }(LNXGames = window.LNXGames || {}));

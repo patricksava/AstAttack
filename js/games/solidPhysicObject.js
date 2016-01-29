@@ -55,10 +55,6 @@
       callbacks.emit("update");
     };
 
-    this.emitOnUniverse = function() {
-      callbacks.emit("onUniverse");
-    };
-
     this.stopMovementToDownwards = function() {
       if(this.accel.y < 0) this.accel.y = 0;
       if(this.vel.y < 0) this.vel.y = 0;

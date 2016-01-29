@@ -24,14 +24,14 @@
         sprite.beginFill(0x995555);
         sprite.drawRect(0, 0, obj.width, obj.height);
         sprite.endFill();
-        obj.sprite = sprite;
+
         if(obj.type !== "weak") {
           container.addChild(sprite);
         }
-      });
-      game.universe.listen("objectUpdated", function(obj) {
-        obj.sprite.x = obj.x;
-        obj.sprite.y = 480-obj.y;
+        obj.listen("update", function() {
+          sprite.x = this.x;
+          sprite.y = 480-this.y;
+        });
       });
 
       game.samus.listen("stateChange", samusGraphics.changeAnimationToCompatibleWithState);

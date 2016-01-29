@@ -91,10 +91,6 @@
       callbacks.emit("blockedLeft", objBlocking);
     };
 
-    this.verifyFalling = function() {
-      if(this.vel.y < 0) callbacks.emit("falling");
-    }
-
     this.collides = function(obj2) {
       var topLeftCorner1 =     {x: this.x,            y: this.y};
       var topLeftCorner2 =     {x: obj2.x,            y: obj2.y};

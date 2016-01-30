@@ -10,7 +10,10 @@
     {
       start: -3,
       frequency: {
-        "spinnerl2" : 4,
+        "straight" : 4,
+        "double" : 7,
+        "spinner" : 10,
+        "spinnerl2" : 13
       }
     },
     {

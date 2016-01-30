@@ -8,8 +8,8 @@
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
     var healthPoints = 1;
-    var X_SPEED = 3;
-    var Y_SPEED = 3;
+    var X_SPEED = 5;
+    var Y_SPEED = 5;
     var physic = new SolidPhysicObject(x, y, 45, 45, "asteroid");
     var directionX = "";
     var directionY = "";

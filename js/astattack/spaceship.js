@@ -7,21 +7,23 @@
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
     var shotController = shotCont;
-    var X_SPEED = -0.3;
+    var X_SPEED = -3;
     var Y_SPEED = 0;
+    var SHOT_SPEED = 6;
     var physic = new SolidPhysicObject(x, y, 45, 45, "ship");
+    var tick = 0;
     var statesMachine = new StateMachine({
       start: "moving",
 
       timedTransitions: {
-        "shoot": [{"3s": "shootProjectile"}]
+        "shoot": [{"1s": "shootProjectile"}]
       },
 
       states: {
         "moving" : {
           action: function() {
             physic.velocityX(X_SPEED);
-            physic.velocityY(0);
+            physic.velocityY(2*Math.sin((tick++*0.05)));
           },
           transitions: {
             "shootProjectile" : "moving",
@@ -51,7 +53,7 @@
       
       activeTransitions: { 
         "shootProjectile" : function(){
-          shotController.create(physic.x-1, physic.y, -2, 0);
+          shotController.create(physic.x-1, physic.y, -SHOT_SPEED, 0);
         }
       }
     });

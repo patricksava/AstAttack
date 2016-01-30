@@ -7,15 +7,16 @@
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
     var shotController = shotCont;
-    var X_SPEED = -0.3;
+    var X_SPEED = -3;
     var Y_SPEED = 0;
+    var SHOT_SPEED = 6;
     var angle = 180;
     var physic = new SolidPhysicObject(x, y, 45, 45, "ship");
     var statesMachine = new StateMachine({
       start: "moving",
 
       timedTransitions: {
-        "shoot": [{"3s": "shootProjectile"}]
+        "shoot": [{"1s": "shootProjectile"}]
       },
 
       states: {
@@ -56,7 +57,7 @@
             var shotAngle = angle + i*20;
             var rotVec = angleToVector(shotAngle);
             var shotVec = angleToVector((shotAngle+120)%360);
-            shotController.create(physic.x+rotVec.x*20, physic.y+rotVec.y*20, shotVec.x*2, shotVec.y*2);
+            shotController.create(physic.x+rotVec.x*20, physic.y+rotVec.y*20, shotVec.x*SHOT_SPEED, shotVec.y*SHOT_SPEED);
           }
           angle = (angle + 75) % 360;
         }

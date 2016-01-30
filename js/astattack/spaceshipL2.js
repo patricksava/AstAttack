@@ -7,21 +7,24 @@
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
     var shotController = shotCont;
-    var X_SPEED = -0.3;
+    var X_SPEED = -3;
     var Y_SPEED = 0;
+    var SHOT_SPEED = 6;
+    var tick = 0;
     var physic = new SolidPhysicObject(x, y, 45, 45, "ship");
     var statesMachine = new StateMachine({
       start: "moving",
 
       timedTransitions: {
-        "shoot": [{"3s": "shootProjectile"}]
+        "shoot": [{"1s": "shootProjectile"}]
       },
 
       states: {
         "moving" : {
           action: function() {
             physic.velocityX(X_SPEED);
-            physic.velocityY(0);
+            physic.velocityY((1 - 2*(Math.floor(tick / 45)))*2);
+            tick = (tick + 1) % 90
           },
           transitions: {
             "shootProjectile" : "moving",
@@ -51,11 +54,20 @@
       
       activeTransitions: { 
         "shootProjectile" : function(){
-          shotController.create(physic.x-1, physic.y, -2, 0.5);
-          shotController.create(physic.x-1, physic.y, -2, -0.5);
+          var vec1 = angleToVector(165);
+          var vec2 = angleToVector(195);
+          shotController.create(physic.x-1, physic.y, vec1.x*SHOT_SPEED, vec1.y*SHOT_SPEED);
+          shotController.create(physic.x-1, physic.y, vec1.x*SHOT_SPEED, vec2.y*SHOT_SPEED);
         }
       }
     });
+
+    function angleToVector(degrees) {
+      return {
+        x: Math.cos(degrees*Math.PI/180.0),
+        y: Math.sin(degrees*Math.PI/180.0)
+      };
+    }
 
     this.init = function() {
       physic.listen("collision", function(obj) {

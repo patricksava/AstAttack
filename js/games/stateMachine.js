@@ -80,7 +80,7 @@
       for(var timeStr in transitionDSL) {
         var name = transitionDSL[timeStr];
       }
-      var seconds = parseInt(timeStr.match(/(\d+)s/)[1], 10);
+      var seconds = parseFloat(timeStr.match(/([\d.]+)s/)[1]);
       return {
         name: name,
         time: seconds

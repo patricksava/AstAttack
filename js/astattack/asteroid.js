@@ -9,30 +9,19 @@
     var X_SPEED = 5;
     var Y_SPEED = 5;
     var physic = new SolidPhysicObject(x, y, 20, 47, "weak");
-    var directionX = "right";
-    var directionY = "up";
+    var directionX = "";
+    var directionY = "";
     var statesMachine = new StateMachine({
       start: "standing",
       states: {
         "moving" : {
           action: function() {
-            if(directionX === "right") {
-              physic.velocityX(X_SPEED);
-            } else if(directionX === "left") {
-              physic.velocityX(-1*X_SPEED);
-            } else {
-              physic.velocityX(0);
-            }
-            if(directionY === "up") {
-              physic.velocityY(Y_SPEED);
-            } else if(directionY === "down") {
-              physic.velocityY(-1*Y_SPEED);
-            } else {
-              physic.velocityY(0);
-            }
+
           },
           transitions: {
             "stop": "standing",
+            "stopX": "moving",
+            "stopY": "moving",
             "moveLeft": "moving",
             "moveRight": "moving",
             "moveUp": "moving",
@@ -62,10 +51,12 @@
       ],
       
       activeTransitions: {
-        "moveRight": function() { directionX = "right"; },
-        "moveLeft": function() { directionX = "left"; },
-        "moveUp": function() { directionY = "up"; },
-        "moveDown": function() { directionY = "down"; },
+        "moveRight": function() { directionX = "right"; physic.velocityX(X_SPEED); },
+        "moveLeft": function() { directionX = "left"; physic.velocityX(-1*X_SPEED); },
+        "moveUp": function() { directionY = "up"; physic.velocityY(Y_SPEED); },
+        "moveDown": function() { directionY = "down"; physic.velocityY(-1*Y_SPEED); },
+        "stopX": function() { directionX = ""; physic.velocityX(0); },
+        "stopY": function() { directionY = ""; physic.velocityY(0); }
       }
     });
 

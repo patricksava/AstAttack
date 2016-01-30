@@ -25,7 +25,7 @@
     this.changeAnimationToCompatibleWithState = function(state, directionX, directionY) {
       var direction = directionX+directionY;
       var name = animationNameFor(state, direction);
-      console.log(name);
+      //console.log(name);
       self.changeAnimationTo(name);
     };
     
@@ -145,6 +145,9 @@
           {duration: 2, x: 7 + 405, y: 540, width: 45, height: 49}
         ]),
 
+        "standing-": new Animation(sprite, [
+          {duration: 5, x: 24 , y: 785, width: 35, height: 48}
+        ]),
         "standing-up" : new Animation(sprite, [
           {duration: 5, x: 24 , y: 785, width: 35, height: 48}
         ]),

@@ -66,6 +66,12 @@
         noMoves = false;
         game.asteroid.act("moveDown");
       }
+      if(Controls.wasReleased("right") || Controls.wasReleased("left")) {
+        game.asteroid.act("stopX");
+      }
+      if(Controls.wasReleased("down") || Controls.wasReleased("up")) {
+        game.asteroid.act("stopY");
+      }
       if(noMoves)
         game.asteroid.act("stop");
 

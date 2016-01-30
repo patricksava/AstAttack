@@ -1,6 +1,7 @@
 (function(namespace) {
   var Callbacks = LNXCommons.CallbackHelper;
 
+  var nextId = 1;
   namespace.SolidPhysicObject = function(x, y, width, height, type) {
     var callbacks = Callbacks.initializeFor(this);
     this.x = x;
@@ -10,6 +11,7 @@
     this.type = type;
     this.vel = {x: 0, y: 0};
     this.accel = {x: 0, y: 0};
+    this.id = nextId++;
 
     this.velocityX = function(newX) {
       this.vel.x = newX;

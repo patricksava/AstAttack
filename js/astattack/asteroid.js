@@ -2,6 +2,7 @@
   var SolidPhysicObject = LNXGames.SolidPhysicObject;
   var StateMachine = LNXGames.StateMachine;
   var Callbacks = LNXCommons.CallbackHelper;
+  var Config = LNXGames.Config;
 
   namespace.Asteroid = function(x, y) {
     var callbacks = Callbacks.initializeFor(this);
@@ -64,10 +65,10 @@
       ],
       
       activeTransitions: {
-        "moveRight": function() { directionX = "right"; (physic.x < 750) ? physic.velocityX(X_SPEED) : physic.velocityX(0);},
-        "moveLeft": function()  { directionX = "left";  (physic.x > 0) ? physic.velocityX(-1*X_SPEED) : physic.velocityX(0); },
-        "moveUp": function()    { directionY = "up";    (physic.y < 600) ? physic.velocityY(Y_SPEED) : physic.velocityY(0); },
-        "moveDown": function()  { directionY = "down";  (physic.y > 50) ? physic.velocityY(-1*Y_SPEED) : physic.velocityY(0); },
+        "moveRight": function() { directionX = "right"; isOutOfScreenRight() ? physic.velocityX(X_SPEED) : physic.velocityX(0);},
+        "moveLeft": function()  { directionX = "left";  isOutOfScreenLeft() ? physic.velocityX(-1*X_SPEED) : physic.velocityX(0); },
+        "moveUp": function()    { directionY = "up";    isOutOfScreenTop() ? physic.velocityY(Y_SPEED) : physic.velocityY(0); },
+        "moveDown": function()  { directionY = "down";  isOutOfScreenBottom() ? physic.velocityY(-1*Y_SPEED) : physic.velocityY(0); },
         "stopX": function()     { directionX = "";      physic.velocityX(0); },
         "stopY": function()     { directionY = "";      physic.velocityY(0); },
         "hitByProjectile": function() { 
@@ -80,12 +81,27 @@
       }
     });
 
+    function isOutOfScreenRight() {
+      return physic.x < Config.screenWidth() - 50;
+    }
+
+    function isOutOfScreenLeft() {
+      return physic.x > 0;
+    }
+
+    function isOutOfScreenTop() {
+      return physic.y < 600;
+    }
+
+    function isOutOfScreenBottom() {
+      return physic.y > 50;
+    }
+
     this.init = function() {
       physic.listen("collision", function(obj) {
         if(obj.type === "shot"){
           statesMachine.applyTransition("hitByProjectile");
         }else if(obj.type === "ship"){
-          console.log("shipDestroyed");
           callbacks.emit("shipDestroyed");
         }
       });

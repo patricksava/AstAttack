@@ -34,11 +34,17 @@
           action: function() {
             physic.velocityX(0);
             physic.velocityY(0);
-            console.log("booommmm!");
-
           },
           transitions: {
+            "end": "dead"
           }
+        },
+
+        "dead" : {
+          action: function() {
+            callbacks.emit("dead");
+          },
+          transitions: { }
         }
       },
           

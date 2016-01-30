@@ -10,6 +10,15 @@
       callbacks.emit("objectPushed", obj);
     };
 
+    this.destroy = function(obj) {
+      for(var i = 0; i < objects.length; i++) {
+        if(obj.id === objects[i].id) {
+          objects.splice(i, 1);
+          break;
+        }
+      }
+    };
+
     this.update = function() {
       for(var i = 0; i < objects.length; i++) {
         objects[i].update();

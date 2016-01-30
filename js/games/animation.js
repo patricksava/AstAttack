@@ -1,5 +1,8 @@
 (function(namespace) {
+  var Callbacks = LNXCommons.CallbackHelper;
+
   namespace.Animation = function(sprite, images) {
+    var callbacks = Callbacks.initializeFor(this);
     var texture = sprite.texture;
     var currentImageIndex = 0;
     var framesOfCurrentImage = images[currentImageIndex].duration;
@@ -20,6 +23,9 @@
         sprite.scale.x = 1;
         sprite.x = x;
         sprite.y = y;
+      }
+      if(currentImageIndex == images.length - 1) {
+        callbacks.emit("animationEnd");
       }
     };
 

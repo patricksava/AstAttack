@@ -5,6 +5,7 @@
   var SpaceshipGraphics = LNXAstAttack.SpaceshipGraphics;
   var ShipController = LNXAstAttack.ShipController;
   var ShotController = LNXAstAttack.DirectShotController;
+  var Config = LNXGames.Config;
   var SHIPS = {
     "300" : [[900, 200, "straight"]],
     "320" : [[900, 100, "straight"]],
@@ -32,10 +33,6 @@
       game = new Game(container);
 
       asteroidGraphics = new AsteroidGraphics(container);
-      renderer = PIXI.autoDetectRenderer(game.windowWidth, game.windowHeight, {
-        backgroundColor: 0x004020
-      });
-      document.body.appendChild(renderer.view);
 
       game.asteroid.listen("stateChange", function(state, directionX, directionY) {
         asteroidGraphics.changeAnimationToCompatibleWithState(state, directionX, directionY);
@@ -51,12 +48,18 @@
       });
 
       game.asteroid.physic().listen("update", function() {
-        asteroidGraphics.update(this.x-10, game.windowHeight-this.y);
+        asteroidGraphics.update(this.x-10, Config.screenHeight()-this.y);
       });
 
       shotController = new ShotController(container, game.universe)
       shipController = new ShipController(container, game.universe, shotController);
       game.init();
+
+      renderer = PIXI.autoDetectRenderer(Config.screenWidth(), Config.screenHeight(), {
+        backgroundColor: 0x004020
+      });
+      document.body.appendChild(renderer.view);
+
       requestAnimationFrame(self.update);
     };
 
@@ -71,8 +74,8 @@
         }
       }
 
-      console.log("Score: " + game.score);
-      console.log("Asteroid HP: " + game.asteroid.healthPoints());
+      //console.log("Score: " + game.score);
+      //console.log("Asteroid HP: " + game.asteroid.healthPoints());
       shipController.updateAll();
       shotController.updateAll();
 

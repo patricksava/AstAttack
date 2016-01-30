@@ -4,6 +4,8 @@
   var Callbacks = LNXCommons.CallbackHelper;
   var Config = LNXGames.Config;
 
+  var LIFE_POINTS_PER_SHOT = 20;
+
   namespace.Asteroid = function(x, y) {
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
@@ -43,7 +45,7 @@
           },
           transitions: {
             "destroyed": "destroyed",
-            "hitByProjectile" : "hitted",
+            "hitByProjectile" : "hit",
             "moveLeft": "moving",
             "moveRight": "moving",
             "moveUp": "moving",
@@ -51,9 +53,9 @@
           }
         },
 
-        "hitted" : {
+        "hit" : {
           action: function() {
-            healthPoints = healthPoints - 2; 
+            healthPoints = healthPoints - LIFE_POINTS_PER_SHOT; 
             if(healthPoints <= 0){
               statesMachine.applyTransition("die");
             } else {
@@ -68,6 +70,7 @@
 
         "dead" : {
           action: function() {
+            physic.disable();
             callbacks.emit("dead");
             physic.velocityX(0);
             physic.velocityY(0);

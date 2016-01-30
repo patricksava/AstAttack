@@ -6,7 +6,7 @@
   namespace.DirectShot = function(x, y, vx, vy) {
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
-    var physic = new SolidPhysicObject(x, y, 5, 5, "shot");
+    var physic = new SolidPhysicObject(x, y, 20, 20, "shot");
     var statesMachine = new StateMachine({
       start: "flying",
       states: {

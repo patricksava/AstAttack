@@ -33,9 +33,7 @@
     }
 
     this.changeAnimationToCompatibleWithState = function(state, directionX, directionY) {
-      var direction = directionX+directionY;
-      var name = animationNameFor(state, direction);
-      //console.log(name);
+      var name = state === "dead" ? "dead" : "moving";
       self.changeAnimationTo(name);
     };
     
@@ -45,14 +43,6 @@
       }
       animationName = animName;
     }
-
-    function animationNameFor(state, direction) {
-      if(state === "moving") {
-        return "moving-" + direction;
-      } else {
-        return state;
-      }
-    };
 
    var animmoving = [
       {duration: 5, x: 6   + 38*1, y: 435, width: 38, height: 45},
@@ -80,16 +70,7 @@
 
     function createAnimationsFor(sprite) {
       return {
-        "moving-left" : new Animation(sprite, animmoving),
-        "moving-right" : new Animation(sprite, animmoving),
-        "moving-up" : new Animation(sprite, animmoving),
-        "moving-down" : new Animation(sprite, animmoving),
-
-        "moving-leftup" : new Animation(sprite, animmoving),
-        "moving-leftdown" : new Animation(sprite, animmoving),
-        "moving-rightup" : new Animation(sprite, animmoving),
-        "moving-rightdown" : new Animation(sprite, animmoving),
-
+        "moving" : new Animation(sprite, animmoving),
         "standing": new Animation(sprite, animmoving),
         "dead": new Animation(sprite, animdead)
       };

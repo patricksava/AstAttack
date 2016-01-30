@@ -127,7 +127,7 @@
     }
 
     function finishScene() {
-      goToScene("start");
+      goToScene("ending");
     }
   };
 

@@ -10,7 +10,7 @@
     var earth = null;
 
     this.create = function(whenEnded) {
-      earth = new Earth(Config.screenWidth());
+      earth = new Earth(Config.screenWidth()+200);
       var graphics = new EarthGraphics(container);
 
       earth.listen("stateChange", graphics.changeAnimationToCompatibleWithState);

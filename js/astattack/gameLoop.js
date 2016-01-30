@@ -6,12 +6,12 @@
   var ShipController = LNXAstAttack.ShipController;
   var ShotController = LNXAstAttack.DirectShotController;
   var SHIPS = {
-    "300" : [[640, 200, "straight"]],
-    "320" : [[640, 100, "straight"]],
-    "340" : [[640, 220, "diagonal_up"]],
-    "400" : [[640, 300, "diagonal_up"]],
-    "200" : [[640, 300, "diagonal_down"]],
-    "400" : [[640, 300, "diagonal_down"]],
+    "300" : [[900, 200, "straight"]],
+    "320" : [[900, 100, "straight"]],
+    "340" : [[900, 220, "diagonal_up"]],
+    "400" : [[900, 300, "diagonal_up"]],
+    "200" : [[900, 300, "diagonal_down"]],
+    "400" : [[900, 400, "diagonal_down"]],
   };
 
   namespace.GameLoop = function() {
@@ -28,13 +28,14 @@
     this.start = function() {
       frameCount = 0;
       container = new PIXI.Container();
+
+      game = new Game(container);
+
       asteroidGraphics = new AsteroidGraphics(container);
-      renderer = PIXI.autoDetectRenderer(640, 480, {
+      renderer = PIXI.autoDetectRenderer(game.windowWidth, game.windowHeight, {
         backgroundColor: 0x004020
       });
       document.body.appendChild(renderer.view);
-
-      game = new Game(container);
 
       game.asteroid.listen("stateChange", function(state, directionX, directionY) {
         asteroidGraphics.changeAnimationToCompatibleWithState(state, directionX, directionY);
@@ -50,7 +51,7 @@
       });
 
       game.asteroid.physic().listen("update", function() {
-        asteroidGraphics.update(this.x-10, 480-this.y);
+        asteroidGraphics.update(this.x-10, game.windowHeight-this.y);
       });
 
       shotController = new ShotController(container, game.universe)

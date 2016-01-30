@@ -17,7 +17,7 @@
       states: {
         "moving" : {
           action: function() {
-
+            
           },
           transitions: {
             "destroyed": "destroyed",
@@ -64,10 +64,10 @@
       ],
       
       activeTransitions: {
-        "moveRight": function() { directionX = "right"; physic.velocityX(X_SPEED); },
-        "moveLeft": function()  { directionX = "left";  physic.velocityX(-1*X_SPEED); },
-        "moveUp": function()    { directionY = "up";    physic.velocityY(Y_SPEED); },
-        "moveDown": function()  { directionY = "down";  physic.velocityY(-1*Y_SPEED); },
+        "moveRight": function() { directionX = "right"; (physic.x < 750) ? physic.velocityX(X_SPEED) : physic.velocityX(0);},
+        "moveLeft": function()  { directionX = "left";  (physic.x > 0) ? physic.velocityX(-1*X_SPEED) : physic.velocityX(0); },
+        "moveUp": function()    { directionY = "up";    (physic.y < 600) ? physic.velocityY(Y_SPEED) : physic.velocityY(0); },
+        "moveDown": function()  { directionY = "down";  (physic.y > 50) ? physic.velocityY(-1*Y_SPEED) : physic.velocityY(0); },
         "stopX": function()     { directionX = "";      physic.velocityX(0); },
         "stopY": function()     { directionY = "";      physic.velocityY(0); },
         "hitByProjectile": function() { 

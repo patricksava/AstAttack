@@ -7,6 +7,8 @@
   namespace.Game = function() {
     var self = this;
 
+    this.windowWidth = 800;
+    this.windowHeight = 600;
     this.score = 0;
     this.universe = new UniversalPhysic();
     this.asteroid = new Asteroid(100, 200);

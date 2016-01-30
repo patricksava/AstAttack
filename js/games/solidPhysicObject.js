@@ -55,40 +55,8 @@
       callbacks.emit("update");
     };
 
-    this.stopMovementToDownwards = function() {
-      if(this.accel.y < 0) this.accel.y = 0;
-      if(this.vel.y < 0) this.vel.y = 0;
-    };
-
-    this.stopMovementToUpwards = function() {
-      if(this.accel.y > 0) this.accel.y = 0;
-      if(this.vel.y > 0) this.vel.y = 0;
-    };
-
-    this.stopMovementToLeft = function() {
-      if(this.accel.x < 0) this.accel.x = 0;
-      if(this.vel.x < 0) this.vel.x = 0;
-    };
-
-    this.stopMovementToRight = function() {
-      if(this.accel.x > 0) this.accel.x = 0;
-      if(this.vel.x > 0) this.vel.x = 0;
-    };
-
-    this.emitBlockedBottom = function(objBlocking) {
-      callbacks.emit("blockedBottom", objBlocking);
-    };
-
-    this.emitBlockedTop = function(objBlocking) {
-      callbacks.emit("blockedTop", objBlocking);
-    };
-
-    this.emitBlockedRight = function(objBlocking) {
-      callbacks.emit("blockedRight", objBlocking);
-    };
-
-    this.emitBlockedLeft = function(objBlocking) {
-      callbacks.emit("blockedLeft", objBlocking);
+    this.emitCollision = function(objColliding) {
+      callbacks.emit("collision", objColliding);
     };
 
     this.collides = function(obj2) {

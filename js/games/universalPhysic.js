@@ -19,7 +19,7 @@
         for(var j = i+1; j < objects.length; j++) {
           var obj1 = objects[i];
           var obj2 = objects[j];
-          treatCollision(obj1.collides(obj2));
+          if(obj1.collides(obj2)) treatCollision(obj1, obj2);
         }
       }
 
@@ -28,33 +28,9 @@
       }
     };
 
-    function treatCollision(collision) {
-      if (!collision) return;
-      var weak = collision.solidWeakObject;
-      var fixed = collision.solidFixedObject;
-      
-      var topOut = weak.y - fixed.y;
-      var bottomOut = (fixed.y-fixed.height) - (weak.y-weak.height);
-      var leftOut = fixed.x - weak.x;
-      var rightOut = (weak.x+weak.width) - (fixed.x+fixed.width);
-
-      if(topOut >= Math.max(bottomOut, leftOut, rightOut)) {
-        weak.y = fixed.y + weak.height;
-        weak.stopMovementToDownwards();
-        weak.emitBlockedBottom(fixed);
-      } else if(leftOut >= Math.max(topOut, bottomOut, rightOut)) {
-        weak.x = fixed.x - weak.width;
-        weak.stopMovementToRight();
-        weak.emitBlockedRight(fixed);
-      } else if(rightOut >= Math.max(topOut, bottomOut, leftOut)) {
-        weak.stopMovementToLeft();
-        weak.x = fixed.x + fixed.width;
-        weak.emitBlockedLeft(fixed);
-      } else if(bottomOut >= Math.max(topOut, leftOut, rightOut)) {
-        weak.stopMovementToUpwards();
-        weak.y = fixed.y - fixed.height;
-        weak.emitBlockedTop(fixed);
-      }
+    function treatCollision(obj1, obj2) {
+      obj1.emitCollision(obj2);
+      obj2.emitCollision(obj1);
     }
   };
 }(LNXGames = window.LNXGames || {}));

@@ -8,7 +8,7 @@
     var myself = this;
     var X_SPEED = 3;
     var Y_SPEED = 3;
-    var physic = new SolidPhysicObject(x, y, 45, 45, "weak");
+    var physic = new SolidPhysicObject(x, y, 45, 45, "asteroid");
     var directionX = "";
     var directionY = "";
     var statesMachine = new StateMachine({

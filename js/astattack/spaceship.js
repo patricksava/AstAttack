@@ -10,7 +10,7 @@
     var X_SPEED = -0.3;
     var Y_SPEED = 0;
     var projectileType = projectile;
-    var physic = new SolidPhysicObject(x, y, 45, 45, "weak");
+    var physic = new SolidPhysicObject(x, y, 45, 45, "ship");
     var statesMachine = new StateMachine({
       start: "moving",
 
@@ -25,13 +25,18 @@
             physic.velocityY(0);
           },
           transitions: {
-            "shootProjectile" : "moving"
+            "shootProjectile" : "moving",
+            "exploding" : "exploding"
           }
         },
         
         "exploding" : {
           action: function() {
-            
+            physic.velocityX(0);
+            physic.velocityY(0);
+            console.log("booommmm!");
+          },
+          transitions: {
           }
         }
       },
@@ -47,7 +52,8 @@
 
     this.init = function() {
       physic.listen("collision", function(obj) {
-        statesMachine.applyTransition("exploding");
+        if(obj.type === "asteroid")
+          statesMachine.applyTransition("exploding");
       });
 
       statesMachine.listen("stateChange", function(newState) {

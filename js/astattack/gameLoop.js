@@ -22,7 +22,7 @@
       frameCount = 0;
 
       renderer = PIXI.autoDetectRenderer(Config.screenWidth(), Config.screenHeight(), {
-        backgroundColor: 0x004020
+        backgroundColor: 0x000000
       });
       document.body.appendChild(renderer.view);
 

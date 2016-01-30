@@ -10,6 +10,7 @@
     var sprite = null;
     var animations = null;
     var animationName = null;
+    var graphType = type;
 
     function init() {
       switch (type) {
@@ -18,6 +19,12 @@
           break;
         case "double": 
           tex = PIXI.loader.resources["./img/spaceship.pod.1.small.red.png"].texture.clone();
+          break;
+        case "spinner":
+          tex = PIXI.loader.resources["./img/spinner.png"].texture.clone();
+          break;
+        case "spinnerl2":
+          tex = PIXI.loader.resources["./img/spinnerl2.png"].texture.clone();
           break;
         default:
           tex = PIXI.loader.resources["./img/metroid2.png"].texture.clone();
@@ -54,15 +61,34 @@
     }
 
     function createAnimationsFor(sprite) {
-      return {
-        "moving" : new Animation(sprite, [
-          {duration: 1000, x: 0  , y: 0, width: 40, height: 45}
-        ]),
+      if(graphType != "spinner" && graphType != "spinnerl2"){
+        return {
+          "moving" : new Animation(sprite, [
+            {duration: 1000, x: 0  , y: 0, width: 40, height: 45}
+          ]),
 
-        "exploding" : new Animation(sprite, [
-          {duration: 1000, x: 0  , y: 0, width: 40, height: 45}
-        ]),
-      };
+          "exploding" : new Animation(sprite, [
+            {duration: 1000, x: 0  , y: 0, width: 40, height: 45}
+          ]),
+        };
+      } else {
+        return {
+          "moving" : new Animation(sprite, [
+            {duration: 15, x: 0  , y: 0, width: 70, height: 70},
+            {duration: 15, x: 70  , y: 0, width: 70, height: 70},
+            {duration: 15, x: 140  , y: 0, width: 70, height: 70},
+            {duration: 15, x: 210  , y: 0, width: 70, height: 70},
+            {duration: 15, x: 280  , y: 0, width: 70, height: 70},
+            {duration: 15, x: 350  , y: 0, width: 70, height: 70},
+            {duration: 15, x: 420  , y: 0, width: 70, height: 70},
+            {duration: 15, x: 490  , y: 0, width: 70, height: 70}
+          ]),
+
+          "exploding" : new Animation(sprite, [
+            {duration: 15, x: 0  , y: 0, width: 70, height: 70},
+          ]),
+        };
+      }
     }
     
     init();

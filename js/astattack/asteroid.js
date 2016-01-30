@@ -13,7 +13,7 @@
     var healthPoints = 100;
     var X_SPEED = 5;
     var Y_SPEED = 5;
-    var physic = new SolidPhysicObject(x, y, 45, 45, "asteroid");
+    var physic = new SolidPhysicObject(x, y, 40, 40, "asteroid");
     var directionX = "";
     var directionY = "";
     var statesMachine = new StateMachine({

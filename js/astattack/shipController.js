@@ -26,7 +26,7 @@
       var ShipGraphics = typeConstructors.graphics;
       var id = lastShipId++;
       var ship = new Ship(x, y, shotController);
-      var shipGraphics = new ShipGraphics(container);
+      var shipGraphics = new ShipGraphics(container, type);
 
       ship.listen("stateChange", shipGraphics.changeAnimationToCompatibleWithState);
       ship.listen("dead", function() {

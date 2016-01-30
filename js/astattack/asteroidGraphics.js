@@ -12,7 +12,7 @@
     var animationName = null;
 
     function init() {
-      tex = PIXI.loader.resources["./img/metroid2.png"].texture;
+      tex = PIXI.loader.resources["./img/asteroid_sprite.png"].texture;
       sprite = new PIXI.Sprite(tex);
       animations = createAnimationsFor(sprite);
       animations["dead"].listen("animationEnd", function() {
@@ -45,27 +45,84 @@
     }
 
    var animmoving = [
-      {duration: 5, x: 6   + 38*1, y: 435, width: 38, height: 45},
-      {duration: 5, x: 6   + 38*2, y: 435, width: 38, height: 45},
-      {duration: 5, x: 129 + 44*0, y: 435, width: 44, height: 45},
-      {duration: 5, x: 129 + 44*1, y: 435, width: 44, height: 45},
-      {duration: 5, x: 129 + 44*2, y: 435, width: 44, height: 45},
-      {duration: 5, x: 252 + 47*0, y: 435, width: 47, height: 45},
-      {duration: 5, x: 252 + 47*1, y: 435, width: 47, height: 45},
-      {duration: 5, x: 252 + 47*2, y: 435, width: 47, height: 45},
-      {duration: 5, x: 252 + 47*3, y: 435, width: 47, height: 45}
+      {duration: 5, x: 0,   y: 0, width: 40, height: 40},
+      {duration: 5, x: 40,  y: 0, width: 40, height: 40},
+      {duration: 5, x: 80,  y: 0, width: 40, height: 40},
+      {duration: 5, x: 120, y: 0, width: 40, height: 40},
+      {duration: 5, x: 160, y: 0, width: 40, height: 40},
+      {duration: 5, x: 200, y: 0, width: 40, height: 40},
+      {duration: 5, x: 240, y: 0, width: 40, height: 40},
+      {duration: 5, x: 280, y: 0, width: 40, height: 40},
+
+      {duration: 5, x: 0,   y: 40, width: 40, height: 40},
+      {duration: 5, x: 40,  y: 40, width: 40, height: 40},
+      {duration: 5, x: 80,  y: 40, width: 40, height: 40},
+      {duration: 5, x: 120, y: 40, width: 40, height: 40},
+      {duration: 5, x: 160, y: 40, width: 40, height: 40},
+      {duration: 5, x: 200, y: 40, width: 40, height: 40},
+      {duration: 5, x: 240, y: 40, width: 40, height: 40},
+      {duration: 5, x: 280, y: 40, width: 40, height: 40},
+
+      {duration: 5, x: 0,   y: 80, width: 40, height: 40},
+      {duration: 5, x: 40,  y: 80, width: 40, height: 40},
+      {duration: 5, x: 80,  y: 80, width: 40, height: 40},
+      {duration: 5, x: 120, y: 80, width: 40, height: 40},
+      {duration: 5, x: 160, y: 80, width: 40, height: 40},
+      {duration: 5, x: 200, y: 80, width: 40, height: 40},
+      {duration: 5, x: 240, y: 80, width: 40, height: 40},
+      {duration: 5, x: 280, y: 80, width: 40, height: 40},
+
+      {duration: 5, x: 0,   y: 120, width: 40, height: 40},
+      {duration: 5, x: 40,  y: 120, width: 40, height: 40},
+      {duration: 5, x: 80,  y: 120, width: 40, height: 40},
+      {duration: 5, x: 120, y: 120, width: 40, height: 40},
+      {duration: 5, x: 160, y: 120, width: 40, height: 40},
+      {duration: 5, x: 200, y: 120, width: 40, height: 40},
+      {duration: 5, x: 240, y: 120, width: 40, height: 40},
+      {duration: 5, x: 280, y: 120, width: 40, height: 40},
+
+      {duration: 5, x: 0,   y: 160, width: 40, height: 40},
+      {duration: 5, x: 40,  y: 160, width: 40, height: 40},
+      {duration: 5, x: 80,  y: 160, width: 40, height: 40},
+      {duration: 5, x: 120, y: 160, width: 40, height: 40},
+      {duration: 5, x: 160, y: 160, width: 40, height: 40},
+      {duration: 5, x: 200, y: 160, width: 40, height: 40},
+      {duration: 5, x: 240, y: 160, width: 40, height: 40},
+      {duration: 5, x: 280, y: 160, width: 40, height: 40},
+
+      {duration: 5, x: 0,   y: 200, width: 40, height: 40},
+      {duration: 5, x: 40,  y: 200, width: 40, height: 40},
+      {duration: 5, x: 80,  y: 200, width: 40, height: 40},
+      {duration: 5, x: 120, y: 200, width: 40, height: 40},
+      {duration: 5, x: 160, y: 200, width: 40, height: 40},
+      {duration: 5, x: 200, y: 200, width: 40, height: 40},
+      {duration: 5, x: 240, y: 200, width: 40, height: 40},
+      {duration: 5, x: 280, y: 200, width: 40, height: 40},
+
+      {duration: 5, x: 0,   y: 240, width: 40, height: 40},
+      {duration: 5, x: 40,  y: 240, width: 40, height: 40},
+      {duration: 5, x: 80,  y: 240, width: 40, height: 40},
+      {duration: 5, x: 120, y: 240, width: 40, height: 40},
+      {duration: 5, x: 160, y: 240, width: 40, height: 40},
+      {duration: 5, x: 200, y: 240, width: 40, height: 40},
+      {duration: 5, x: 240, y: 240, width: 40, height: 40},
+      {duration: 5, x: 280, y: 240, width: 40, height: 40},
+
+      {duration: 5, x: 0,   y: 280, width: 40, height: 40},
+      {duration: 5, x: 40,  y: 280, width: 40, height: 40},
+      {duration: 5, x: 80,  y: 280, width: 40, height: 40},
+      {duration: 5, x: 120, y: 280, width: 40, height: 40},
+      {duration: 5, x: 160, y: 280, width: 40, height: 40},
+      {duration: 5, x: 200, y: 280, width: 40, height: 40},
+      {duration: 5, x: 240, y: 280, width: 40, height: 40},
+      {duration: 5, x: 280, y: 280, width: 40, height: 40}
     ];
 
    var animdead = [
-      {duration: 15, x: 6   + 38*1, y: 435, width: 38, height: 45},
-      {duration: 15, x: 6   + 38*2, y: 435, width: 38, height: 45},
-      {duration: 15, x: 129 + 44*0, y: 435, width: 44, height: 45},
-      {duration: 15, x: 129 + 44*1, y: 435, width: 44, height: 45},
-      {duration: 15, x: 129 + 44*2, y: 435, width: 44, height: 45},
-      {duration: 15, x: 252 + 47*0, y: 435, width: 47, height: 45},
-      {duration: 15, x: 252 + 47*1, y: 435, width: 47, height: 45},
-      {duration: 15, x: 252 + 47*2, y: 435, width: 47, height: 45},
-      {duration: 15, x: 252 + 47*3, y: 435, width: 47, height: 45}
+      {duration: 10, x: 0,   y: 0, width: 40, height: 40},
+      {duration: 10, x: 40,  y: 0, width: 40, height: 40},
+      {duration: 10, x: 80,  y: 0, width: 40, height: 40},
+      {duration: 10, x: 120, y: 0, width: 40, height: 40}
     ];
 
     function createAnimationsFor(sprite) {

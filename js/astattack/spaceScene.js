@@ -7,15 +7,34 @@
   var ShotController = LNXAstAttack.DirectShotController;
   var EarthController = LNXAstAttack.EarthController;
   var Config = LNXGames.Config;
-  var SHIPS = {
-    "300" : [[900, 200, "straight"]],
-    "320" : [[900, 100, "straight"]],
-    "340" : [[900, 220, "diagonal_up"]],
-    "400" : [[900, 300, "diagonal_up"]],
-    "200" : [[900, 300, "diagonal_down"]],
-    "400" : [[900, 400, "diagonal_down"]],
-    "1400" :  ["earth"]
-  };
+  var TIMELINE = [
+    {
+      start: 0,
+      frequency: {
+        "straight" : 4,
+      }
+    },
+    {
+      start: 10,
+      frequency: {
+        "straight" : 2.87,
+        "diagonal_up" : 8,
+        "diagonal_down" : 8,
+      }
+    },
+    {
+      start: 20,
+      frequency: {
+        "straight" : 2,
+        "diagonal_up" : 5,
+        "diagonal_down" : 5,
+      }
+    },
+    {
+      start: 30,
+      earth: true
+    }
+  ];
 
   namespace.SpaceScene = function(renderer, goToScene) {
     var self = this;
@@ -26,6 +45,9 @@
     var shotController = null;
     var earthController = null;
     var container = null;
+
+    var happenings = timelineToShips(TIMELINE);
+    //console.log(happenings);
 
     this.start = function() {
       container = new PIXI.Container();
@@ -64,15 +86,12 @@
     };
 
     this.update = function(frameCount) {
-      var ships = SHIPS[frameCount];
-      if(ships) {
-        for(var i = 0; i < ships.length; i++) {
-          var params = ships[i];
-          if(params === "earth") {
-            earthController.create(finishScene);
-          } else {
-            shipController.create(params[0], params[1], params[2], params[3]);
-          }
+      var happening = happenings[frameCount];
+      if(happening) {
+        if(happening === "earth") {
+          earthController.create(finishScene);
+        } else {
+          shipController.create(happening[0], happening[1], happening[2]);
         }
       }
 
@@ -128,6 +147,36 @@
     function finishScene() {
       goToScene("ending");
     }
+
+    function timelineToShips(timeline) {
+      var ships = {};
+      for(var i = 0; i < timeline.length-1; i++) {
+        var pack1 = timeline[i];
+        var pack2 = timeline[i+1];
+        for(var shipType in pack1.frequency) {
+          var j = 1;
+          var shipTime = (pack1.frequency[shipType]*60.0)*j + pack1.start*60;
+          //console.log(shipTime);
+          while(shipTime < pack2.start*60) {
+            ships[shipTime] = [Config.screenWidth(), Config.screenHeight()*Math.random(), shipType];
+            j++;
+            shipTime = (pack1.frequency[shipType]*60.0)*j + pack1.start*60;
+          }
+        }
+      }
+      ships[timeline[timeline.length-1].start*60] = "earth";
+      return ships;
+    }
   };
 
+
+  // var SHIPS = {
+  //   "300" : [[900, 200, "straight"]],
+  //   "320" : [[900, 100, "straight"]],
+  //   "340" : [[900, 220, "diagonal_up"]],
+  //   "400" : [[900, 300, "diagonal_up"]],
+  //   "200" : [[900, 300, "diagonal_down"]],
+  //   "400" : [[900, 400, "diagonal_down"]],
+  //   "1400" :  ["earth"]
+  // };
 }(LNXAstAttack = window.LNXAstAttack || {}));

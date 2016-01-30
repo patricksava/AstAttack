@@ -38,6 +38,10 @@
       return pressed[keyName];
     };
 
+    this.isReleased = function(keyName) {
+      return !this.isPressed(keyName);
+    };
+
     this.wasReleased = function(keyName) {
       var wasReleased = activeReleased[keyName];
       activeReleased[keyName] = false;

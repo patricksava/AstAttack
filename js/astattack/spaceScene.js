@@ -74,6 +74,21 @@
         });
       });
 
+      if(Config.debug()) {
+        game.universe.listen("objectPushed", function(obj) {
+          var sprite = new PIXI.Graphics();
+          sprite.beginFill(0x995555);
+          sprite.drawRect(0, 0, obj.width, obj.height);
+          sprite.endFill();
+          sprite.alpha = 0.5;
+          container.addChild(sprite);
+          obj.listen("update", function() {
+            sprite.x = this.x;
+            sprite.y = Config.screenHeight()-this.y;
+          });
+        });
+      }
+
       game.asteroid.physic().listen("update", function() {
         asteroidGraphics.update(this.x-10, Config.screenHeight()-this.y);
       });

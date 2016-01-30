@@ -16,6 +16,10 @@
       screenWidth = width;
       screenHeight = height;
     };
+
+    this.debug = function() {
+      return window.location.search.toLowerCase().includes("debug");
+    };
   };
 
   

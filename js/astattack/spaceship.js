@@ -15,7 +15,7 @@
       start: "moving",
 
       timedTransitions: {
-        "shoot": [{"4s": "shootProjectile"}]
+        "shoot": [{"3s": "shootProjectile"}]
       },
 
       states: {
@@ -35,6 +35,7 @@
             physic.velocityX(0);
             physic.velocityY(0);
             console.log("booommmm!");
+
           },
           transitions: {
           }

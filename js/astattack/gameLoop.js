@@ -40,6 +40,15 @@
         asteroidGraphics.changeAnimationToCompatibleWithState(state, directionX, directionY);
       });
 
+      game.asteroid.listen("shipDestroyed", function() {
+        game.score = game.score + 20;
+      });
+
+      game.asteroid.listen("lifeOver", function() {
+        console.log("Game Over... but at least you still have your home Planet.");
+        //TODO: talvez acabar a partida ou recomecar com outro asteroide
+      });
+
       game.asteroid.physic().listen("update", function() {
         asteroidGraphics.update(this.x-10, 480-this.y);
       });
@@ -61,6 +70,8 @@
         }
       }
 
+      console.log("Score: " + game.score);
+      console.log("Asteroid HP: " + game.asteroid.healthPoints());
       shipController.updateAll();
       shotController.updateAll();
 

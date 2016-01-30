@@ -21,7 +21,6 @@
     }
 
     this.create = function(x, y, type) {
-      console.log(type);
       var shot = new DirectShot(x, y, type.x, type.y);
       var shotGraphics = new DirectShotGraphics(container);
 

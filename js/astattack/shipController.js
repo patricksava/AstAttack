@@ -33,9 +33,12 @@
         self.destroy(id);
       });
 
-      ship.physic().listen("update", function() {
-        shipGraphics.update(this.x, Config.screenHeight() - this.y);
+      ship.physic().listen("collision", function(obj) {
+        if(obj.type === "asteroid") {
+          ship.physic().disable();
+        }
       });
+
       shipGraphics.listen("explodingEnd", function() {
         ship.act("end");
       });
@@ -48,13 +51,15 @@
     this.updateAll = function() {
       for(id in ships) {
         ships[id].update();
+        var physic = ships[id].physic();
+        allGraphics[id].update(physic.x, Config.screenHeight() - physic.y);
       }
     };
 
     this.destroy = function(id) {
       universe.destroy(ships[id].physic());
-      allGraphics[id].destroy();
       delete ships[id];
+      allGraphics[id].destroy();
       delete allGraphics[id];
     };
   };

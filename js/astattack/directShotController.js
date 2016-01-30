@@ -12,6 +12,12 @@
 
       shot.listen("stateChange", shotGraphics.changeAnimationToCompatibleWithState);
 
+      shot.physic().listen("collision", function(obj) {
+        if(obj.type === "asteroid") {
+          shot.physic().disable();
+        }
+      });
+
       shot.physic().listen("update", function() {
         shotGraphics.update(this.x, Config.screenHeight()-this.y);
       });

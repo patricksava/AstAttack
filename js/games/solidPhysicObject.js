@@ -12,6 +12,7 @@
     this.vel = {x: 0, y: 0};
     this.accel = {x: 0, y: 0};
     this.id = nextId++;
+    this.disabled = false;
 
     this.velocityX = function(newX) {
       this.vel.x = newX;
@@ -61,7 +62,12 @@
       callbacks.emit("collision", objColliding);
     };
 
+    this.disable = function() {
+      this.disabled = true;
+    };
+
     this.collides = function(obj2) {
+      if(this.disabled || obj2.disabled) return false;
       var topLeftCorner1 =     {x: this.x,            y: this.y};
       var topLeftCorner2 =     {x: obj2.x,            y: obj2.y};
       var bottomRightCorner1 = {x: this.x+this.width, y: this.y-this.height};

@@ -1,7 +1,7 @@
 (function(namespace) {
   var Animation = LNXGames.Animation;
 
-  namespace.SpaceshipGraphics = function(container) {
+  namespace.AsteroidGraphics = function(container) {
     var self = this;
     var animation = null;
     var tex = null;
@@ -23,7 +23,7 @@
     };
 
     this.changeAnimationToCompatibleWithState = function(state) {
-      self.changeAnimationTo(name);
+      self.changeAnimationTo(state);
     };
     
     this.changeAnimationTo = function(animName) {
@@ -35,10 +35,11 @@
 
     function animationNameFor(state, direction) {
       var animationPrefix = {
-        "moving" : "moving"
+        "moving" : "moving",
+        "exploding" : "exploding"
       };
 
-      return animationPrefix[state] + "-" + direction;
+      return animationPrefix[state];
     };
 
     function createAnimationsFor(sprite) {
@@ -54,7 +55,11 @@
           {duration: 2, x: 7 + 315, y: 540, width: 45, height: 49},
           {duration: 2, x: 7 + 360, y: 540, width: 45, height: 49},
           {duration: 2, x: 7 + 405, y: 540, width: 45, height: 49}
-        ])
+        ]),
+
+        "exploding" : new Animation(sprite, [
+          //TODO: exploding animation
+        ]),
       };
     }
     

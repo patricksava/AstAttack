@@ -1,8 +1,8 @@
 (function(namespace) {
   var Game = LNXGdie.Game;
   var Controls = LNXGames.Controls;
-  var AsteroidGraphics = LNXGdie.AsteroidGraphics;
-  var SpaceshipGraphics = LNXGdie.SpaceshipGraphics;
+  var AsteroidGraphics = LNXAstAttack.AsteroidGraphics;
+  var SpaceshipGraphics = LNXAstAttack.SpaceshipGraphics;
 
   namespace.GameLoop = function() {
     var container = null;
@@ -15,7 +15,6 @@
     this.start = function() {
       container = new PIXI.Container();
       asteroidGraphics = new AsteroidGraphics(container);
-      spaceshipGraphics = new SpaceshipGraphics(container);
       renderer = PIXI.autoDetectRenderer(640, 480, {
         backgroundColor: 0x004020
       });

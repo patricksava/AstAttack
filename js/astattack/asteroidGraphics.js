@@ -180,4 +180,4 @@
     
     init();
   };
-}(LNXGdie = window.LNXGdie || {}));
+}(LNXAstAttack = window.LNXAstAttack || {}));

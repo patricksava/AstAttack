@@ -3,14 +3,20 @@
   var StateMachine = LNXGames.StateMachine;
   var Callbacks = LNXCommons.CallbackHelper;
 
-  namespace.Spaceship = function(x, y) {
+  namespace.Spaceship = function(x, y, shotCont) {
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
-    var X_SPEED = -3;
+    var shotController = shotCont;
+    var X_SPEED = -0.3;
     var Y_SPEED = 0;
     var physic = new SolidPhysicObject(x, y, 45, 45, "weak");
     var statesMachine = new StateMachine({
       start: "standing",
+
+      timedTransitions: {
+        "shoot": [{"4s": "shootProjectile"}]
+      },
+
       states: {
         "standing" : {
           action: function() {
@@ -18,11 +24,7 @@
             physic.velocityY(0);
           }
         },
-        "standingShooting" : {
-          action: function() {
-            
-          }
-        },
+        
         "exploding" : {
           action: function() {
             
@@ -30,11 +32,13 @@
         }
       },
           
-      passiveTransitions: [
-        "hit"
-      ],
+      passiveTransitions: [ ],
       
-      activeTransitions: { }
+      activeTransitions: { 
+        "shootProjectile" : function(){
+          shotController.create(physic.x-1, physic.y);
+        }
+      }
     });
 
     this.init = function() {
@@ -53,4 +57,4 @@
 
     this.physic = function(){ return physic; };
   };
-}(LNXGdie = window.LNXGdie || {}));
+}(LNXAstAttack = window.LNXAstAttack || {}));

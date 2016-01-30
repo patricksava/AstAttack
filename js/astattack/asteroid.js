@@ -44,8 +44,8 @@
             physic.velocityX(0);
             physic.velocityY(0);
 
-            directionX = null;
-            directionY = null;
+            directionY = "";
+            directionX = "";
           },
           transitions: {
             "moveLeft": "moving",

@@ -34,7 +34,9 @@
         });
       });
 
-      game.asteroid.listen("stateChange", asteroidGraphics.changeAnimationToCompatibleWithState);
+      game.asteroid.listen("stateChange", function(state, directionX, directionY) {
+        asteroidGraphics.changeAnimationToCompatibleWithState(state, directionX, directionY);
+      });
 
       game.asteroid.physic().listen("update", function() {
         asteroidGraphics.update(this.x-10, 480-this.y);
@@ -46,8 +48,8 @@
 
     this.update = function() {
       requestAnimationFrame(self.update);
-      var noMoves = true;
 
+      var noMoves = true;
       if(Controls.isPressed("right")) {
         noMoves = false;
         game.asteroid.act("moveRight");
@@ -58,7 +60,6 @@
       }
       if(Controls.isPressed("up")) {
         noMoves = false;
-        console.log("upppp")
         game.asteroid.act("moveUp");
       }
       if(Controls.isPressed("down")) {
@@ -67,6 +68,7 @@
       }
       if(noMoves)
         game.asteroid.act("stop");
+
 
       game.update();
       renderer.render(container);

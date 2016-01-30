@@ -23,8 +23,10 @@
     };
 
     this.changeAnimationToCompatibleWithState = function(state, directionX, directionY) {
-      var direction = directionX+directionY
-      self.changeAnimationTo(animationNameFor(state, direction));
+      var direction = directionX+directionY;
+      var name = animationNameFor(state, direction);
+      console.log(name);
+      self.changeAnimationTo(name);
     };
     
     this.changeAnimationTo = function(animName) {

@@ -6,19 +6,24 @@
   namespace.Spaceship = function(x, y) {
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
-    var RUNNING_VEL = 0;
-    var JUMPING_VEL = 0;
-    var physic = new SolidPhysicObject(x, y, 40, 47, "weak");
+    var X_SPEED = -3;
+    var Y_SPEED = 0;
+    var physic = new SolidPhysicObject(x, y, 45, 45, "weak");
     var statesMachine = new StateMachine({
       start: "standing",
       states: {
         "standing" : {
           action: function() {
-            physic.velocityX(0);
+            physic.velocityX(X_SPEED);
             physic.velocityY(0);
           }
         },
         "standingShooting" : {
+          action: function() {
+            
+          }
+        },
+        "exploding" : {
           action: function() {
             
           }
@@ -34,7 +39,7 @@
 
     this.init = function() {
       physic.listen("hitByAsteroid", function() {
-        statesMachine.applyTransition("hit");
+        statesMachine.applyTransition("exploding");
       });
     }
 

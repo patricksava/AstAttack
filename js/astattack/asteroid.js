@@ -6,9 +6,9 @@
   namespace.Asteroid = function(x, y) {
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
-    var X_SPEED = 5;
-    var Y_SPEED = 5;
-    var physic = new SolidPhysicObject(x, y, 20, 47, "weak");
+    var X_SPEED = 3;
+    var Y_SPEED = 3;
+    var physic = new SolidPhysicObject(x, y, 45, 45, "weak");
     var directionX = "";
     var directionY = "";
     var statesMachine = new StateMachine({
@@ -52,11 +52,11 @@
       
       activeTransitions: {
         "moveRight": function() { directionX = "right"; physic.velocityX(X_SPEED); },
-        "moveLeft": function() { directionX = "left"; physic.velocityX(-1*X_SPEED); },
-        "moveUp": function() { directionY = "up"; physic.velocityY(Y_SPEED); },
-        "moveDown": function() { directionY = "down"; physic.velocityY(-1*Y_SPEED); },
-        "stopX": function() { directionX = ""; physic.velocityX(0); },
-        "stopY": function() { directionY = ""; physic.velocityY(0); }
+        "moveLeft": function()  { directionX = "left";  physic.velocityX(-1*X_SPEED); },
+        "moveUp": function()    { directionY = "up";    physic.velocityY(Y_SPEED); },
+        "moveDown": function()  { directionY = "down";  physic.velocityY(-1*Y_SPEED); },
+        "stopX": function()     { directionX = "";      physic.velocityX(0); },
+        "stopY": function()     { directionY = "";      physic.velocityY(0); }
       }
     });
 

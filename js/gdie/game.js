@@ -6,7 +6,8 @@
   namespace.Game = function() {
     var self = this;
     this.universe = new UniversalPhysic();
-    this.samus =  new Samus(100, 480);
+    this.asteroid =  new Samus(100, 480);
+    this.samus = this.asteroid;
 
     this.init = function() {
       self.samus.init();

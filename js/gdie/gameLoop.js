@@ -1,6 +1,7 @@
 (function(namespace) {
   var Game = LNXGdie.Game;
   var Controls = LNXGames.Controls;
+  var DirectShotController = LNXAstAttack.DirectShotController;
   var SamusGraphics = LNXGdie.HeroGraphics;
 
   namespace.GameLoop = function() {
@@ -40,6 +41,7 @@
         samusGraphics.update(this.x-10, 480-this.y);
       });
 
+      directShotController = new DirectShotController(container, game.universe);
       game.init();
       requestAnimationFrame(self.update);
     };
@@ -70,6 +72,7 @@
         game.samus.act("fall");
       }
 
+      directShotController.updateAll();
       game.update();
       renderer.render(container);
     };

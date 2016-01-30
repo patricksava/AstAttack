@@ -1,5 +1,6 @@
 (function(namespace) {
   var Callbacks = LNXCommons.CallbackHelper;
+  var Timing = LNXCommons.Timing;
 
   namespace.StateMachine = function(opts) {
     var callbacks = Callbacks.initializeFor(this);
@@ -45,13 +46,15 @@
 
 
     this.stopTimedTransition = function(name) {
-      clearInterval(chains[name].intervalId);
-      chains[name].intervalId = null;
+      // Need to evolve Timing module
+      // clearInterval(chains[name].intervalId);
+      // chains[name].intervalId = null;
     };
 
     this.restartTimedTransition = function(name) {
-      chains[name].nextTransition = 0;
-      executeNextOnChain(name);
+      // Need to evolve Timing module
+      // chains[name].nextTransition = 0;
+      // executeNextOnChain(name);
     };
 
     function startTimedChain(name, chain) {
@@ -66,7 +69,7 @@
     function executeNextOnChain(name) {
       var chain = chains[name];
       var transition = timedTransitionFrom(chain.transitions[chain.nextTransition]);
-      transition.intervalId = setTimeout(function() {
+      Timing.timeout(function() {
         self.applyTransition(transition.name);
         chain.nextTransition = (chain.nextTransition + 1) % chain.transitions.length;
         executeNextOnChain(name)
@@ -78,10 +81,9 @@
         var name = transitionDSL[timeStr];
       }
       var seconds = parseInt(timeStr.match(/(\d+)s/)[1], 10);
-      var millis = seconds * 1000;
       return {
         name: name,
-        time: millis
+        time: seconds
       };
     }
   };

@@ -3,7 +3,8 @@
     var KEYS = {
       '39': "right",
       '37': "left",
-      '38': "up"
+      '38': "up",
+      '40': "down"
     };
 
     var pressed = {};

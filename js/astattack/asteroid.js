@@ -6,133 +6,78 @@
   namespace.Asteroid = function(x, y) {
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
-    var RUNNING_VEL = 5;
-    var JUMPING_VEL = 2;
+    var X_SPEED = 5;
+    var Y_SPEED = 5;
     var physic = new SolidPhysicObject(x, y, 20, 47, "weak");
-    var direction = "right";
+    var directionX = "right";
+    var directionY = "up";
     var statesMachine = new StateMachine({
       start: "standing",
       states: {
-        "running" : {
+        "moving" : {
           action: function() {
-            if(direction === "right") {
-              physic.velocityX(RUNNING_VEL);
+            if(directionX === "right") {
+              physic.velocityX(X_SPEED);
+            } else if(directionX === "left") {
+              physic.velocityX(-1*X_SPEED);
             } else {
-              physic.velocityX(-1*RUNNING_VEL);
+              physic.velocityX(0);
+            }
+            if(directionY === "up") {
+              physic.velocityY(Y_SPEED);
+            } else if(directionY === "down") {
+              physic.velocityY(-1*Y_SPEED);
+            } else {
+              physic.velocityY(0);
             }
           },
           transitions: {
-            "falling": "falling-moving",
             "stop": "standing",
-            "jump": "jumping-moving",
-            "moveLeft": "running",
-            "moveRight": "running"
+            "moveLeft": "moving",
+            "moveRight": "moving",
+            "moveUp": "moving",
+            "moveDown": "moving"
           }
         },
         "standing" : {
           action: function() {
             physic.velocityX(0);
+            physic.velocityY(0);
+
+            directionX = null;
+            directionY = null;
           },
           transitions: {
-            "falling": "falling-still",
-            "moveLeft": "running",
-            "moveRight": "running",
-            "jump": "jumping-still"
-          }
-        },
-        "jumping-moving" : {
-          action: function() {
-            physic.noForces();
-            var upImpulse = 0.7;
-            var frontImpulse = 4;
-            if(direction === "right") {
-              physic.force(frontImpulse, upImpulse);
-            } else {
-              physic.force(-1*frontImpulse, upImpulse);
-            }
-          },
-          immediateTransition: "on-the-air-moving"
-        },
-        "jumping-still" : {
-          action: function() {
-            physic.noForces();
-            var upImpulse = 0.8;
-            physic.force(0, upImpulse);
-          },
-          immediateTransition: "on-the-air-still"
-        },
-        "on-the-air-still" : {
-          action: function() {
-            physic.velocityX(0);
-          },
-          transitions: {
-            "falling": "falling-still",
-            "fall": "falling-still",
-            "moveRight": "on-the-air-moving",
-            "moveLeft": "on-the-air-moving",
-            "land": "standing"
-          }
-        },
-        "on-the-air-moving" : {
-          action: function() {
-            if(direction === "right") {
-              physic.velocityX(JUMPING_VEL);
-            } else {
-              physic.velocityX(-1*JUMPING_VEL);
-            }
-          },
-          transitions: {
-            "falling": "falling-moving",
-            "fall": "falling-still",
-            "stop": "on-the-air-still",
-            "land": "running",
-            "moveLeft": "on-the-air-moving",
-            "moveRight": "on-the-air-moving"
-          }
-        },
-        "falling-still": {
-          action: "on-the-air-still",
-          transitions: {
-            "moveRight": "falling-moving",
-            "moveLeft": "falling-moving",
-            "land": "standing"
-          }
-        },
-        "falling-moving": {
-          action: "on-the-air-moving",
-          transitions: {
-            "stop": "falling-still",
-            "land": "running",
-            "moveLeft": "falling-moving",
-            "moveRight": "falling-moving"
+            "moveLeft": "moving",
+            "moveRight": "moving",
+            "moveUp": "moving",
+            "moveDown": "moving"
           }
         }
+        
       },
           
       passiveTransitions: [
-        "stop", "land"
+        "stop", "shot"
       ],
       
       activeTransitions: {
-        "moveRight": function() { direction = "right"; },
-        "moveLeft": function() { direction = "left"; },
-        "land": function() { physic.noForces(); },
-        "fall" : function() { physic.force(0, -0.3); }
+        "moveRight": function() { directionX = "right"; },
+        "moveLeft": function() { directionX = "left"; },
+        "moveUp": function() { directionY = "up"; },
+        "moveDown": function() { directionY = "down"; },
       }
     });
 
     this.init = function() {
-      physic.listen("blockedBottom", function() {
-        statesMachine.applyTransition("land");
-      });
-      physic.listen("falling", function() {
-        statesMachine.applyTransition("falling");
+      physic.listen("shot", function() {
+        statesMachine.applyTransition("shot");
       });
 
       statesMachine.listen("stateChange", function(newState, transition, previousState) {
-        callbacks.emit("stateChange", [newState, direction]);
+        callbacks.emit("stateChange", [newState, directionX, directionY]);
       });
-      callbacks.emit("stateChange", [statesMachine.state(), direction]);
+      callbacks.emit("stateChange", [statesMachine.state(), directionX, directionY]);
     }
 
     this.act = function(action) {

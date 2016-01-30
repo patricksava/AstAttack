@@ -45,6 +45,8 @@
     var shotController = null;
     var earthController = null;
     var container = null;
+    var scoreLabel = null;
+    var hpLabel = null;
 
     var happenings = timelineToShips(TIMELINE);
 
@@ -78,6 +80,20 @@
         asteroidGraphics.update(this.x-10, Config.screenHeight()-this.y);
       });
 
+      scoreLabel = new PIXI.Text("Score: " + game.score + " ", {font : '20px Monospaced', fill : 0xffffff, lineHeight: 30});
+      scoreLabel.anchor.x = 1.0;
+      scoreLabel.anchor.y = 0.0;
+      scoreLabel.x = Config.screenWidth();
+      scoreLabel.y = 0;
+      container.addChild(scoreLabel);
+
+      hpLabel = new PIXI.Text("HP: " + game.asteroid.healthPoints() + "/" + game.asteroid.maxHP(), {font : '20px Monospaced', fill : 0xffffff, lineHeight: 30});
+      hpLabel.anchor.x = 0.0;
+      hpLabel.anchor.y = 0.0;
+      hpLabel.x = 0.5;
+      hpLabel.y = 0.5;
+      container.addChild(hpLabel);
+
       shotController = new ShotController(container, game.universe)
       shipController = new ShipController(container, game.universe, shotController);
       earthController = new EarthController(container, game.universe);
@@ -99,6 +115,9 @@
       shipController.updateAll();
       shotController.updateAll();
       earthController.update();
+
+      scoreLabel.text = "Score: " + game.score + " ";
+      hpLabel.text = "HP: " + game.asteroid.healthPoints() + "/" + game.asteroid.maxHP();
 
       var noMoves = true;
       if(Controls.isPressed("right")) {

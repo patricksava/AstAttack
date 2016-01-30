@@ -7,7 +7,8 @@
   namespace.Asteroid = function(x, y) {
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
-    var healthPoints = 1;
+    var maxHP = 100;
+    var healthPoints = 100;
     var X_SPEED = 5;
     var Y_SPEED = 5;
     var physic = new SolidPhysicObject(x, y, 45, 45, "asteroid");
@@ -52,7 +53,7 @@
 
         "hitted" : {
           action: function() {
-            healthPoints = healthPoints - 1; 
+            healthPoints = healthPoints - 2; 
             if(healthPoints <= 0){
               statesMachine.applyTransition("die");
             } else {
@@ -133,5 +134,6 @@
     this.physic = function(){ return physic; };
 
     this.healthPoints = function(){ return healthPoints; };
+    this.maxHP = function(){ return maxHP; };
   };
 }(LNXAstAttack = window.LNXAstAttack || {}));

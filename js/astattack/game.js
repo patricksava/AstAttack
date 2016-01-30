@@ -13,7 +13,6 @@
     this.asteroid = new Asteroid(100, 200);
 
     this.init = function() {
-      Config.screenSize(800, 600);
       self.asteroid.init();
       self.universe.push(self.asteroid.physic());
       return this;

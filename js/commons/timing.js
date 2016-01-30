@@ -11,6 +11,10 @@
       scheduled.sort(compareSchedules);
     };
 
+    this.reset = function() {
+      scheduled = [];
+    };
+
     requestAnimationFrame(update);
     function update() {
       requestAnimationFrame(update);

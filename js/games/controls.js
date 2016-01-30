@@ -4,7 +4,8 @@
       '39': "right",
       '37': "left",
       '38': "up",
-      '40': "down"
+      '40': "down",
+      '13': "enter"
     };
 
     var pressed = {};

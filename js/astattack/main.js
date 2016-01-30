@@ -1,5 +1,6 @@
 (function(){
+  gameLoop = new LNXAstAttack.GameLoop();
   PIXI.loader
    .add("./img/metroid2.png")
-   .load(new LNXAstAttack.GameLoop().start);
+   .load(gameLoop.start);
 }());

@@ -42,9 +42,12 @@
         game.score = game.score + 20;
       });
 
-      game.asteroid.listen("lifeOver", function() {
-        console.log("Game Over... but at least you still have your home Planet.");
-        //TODO: talvez acabar a partida ou recomecar com outro asteroide
+      game.asteroid.listen("dead", function() {
+        asteroidGraphics.listen("deadAnimationEnd", function() {
+          //TODO: talvez acabar a partida ou recomecar com outro asteroide
+          console.log("Game Over... but at least you still have your home Planet.");
+          destroyAsteroid();
+        });
       });
 
       game.asteroid.physic().listen("update", function() {
@@ -108,6 +111,11 @@
       game.update();
       renderer.render(container);
     };
+
+    function destroyAsteroid() {
+      game.universe.destroy(game.asteroid.physic());
+      asteroidGraphics.destroy();
+    }
   };
 
 }(LNXAstAttack = window.LNXAstAttack || {}));

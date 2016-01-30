@@ -1,7 +1,9 @@
 (function(namespace) {
+  var Callbacks = LNXCommons.CallbackHelper;
   var Animation = LNXGames.Animation;
 
   namespace.AsteroidGraphics = function(container) {
+    var callbacks = Callbacks.initializeFor(this);
     var self = this;
     var animation = null;
     var tex = null;
@@ -13,6 +15,9 @@
       tex = PIXI.loader.resources["./img/metroid2.png"].texture;
       sprite = new PIXI.Sprite(tex);
       animations = createAnimationsFor(sprite);
+      animations["dead"].listen("animationEnd", function() {
+        callbacks.emit("deadAnimationEnd");
+      });
       sprite.x = -9999;
       sprite.y = -9999;
       container.addChild(sprite);
@@ -42,12 +47,11 @@
     }
 
     function animationNameFor(state, direction) {
-      var animationPrefix = {
-        "moving" : "moving",
-        "standing" : "standing"
-      };
-
-      return animationPrefix[state] + "-" + direction;
+      if(state === "moving") {
+        return "moving-" + direction;
+      } else {
+        return state;
+      }
     };
 
     var animleft = [
@@ -74,6 +78,18 @@
       {duration: 5, x: 252 + 47*3, y: 435, width: 47, height: 45}
     ];
 
+   var animdead = [
+      {duration: 15, x: 6   + 38*1, y: 435, width: 38, height: 45},
+      {duration: 15, x: 6   + 38*2, y: 435, width: 38, height: 45},
+      {duration: 15, x: 129 + 44*0, y: 435, width: 44, height: 45},
+      {duration: 15, x: 129 + 44*1, y: 435, width: 44, height: 45},
+      {duration: 15, x: 129 + 44*2, y: 435, width: 44, height: 45},
+      {duration: 15, x: 252 + 47*0, y: 435, width: 47, height: 45},
+      {duration: 15, x: 252 + 47*1, y: 435, width: 47, height: 45},
+      {duration: 15, x: 252 + 47*2, y: 435, width: 47, height: 45},
+      {duration: 15, x: 252 + 47*3, y: 435, width: 47, height: 45}
+    ];
+
     function createAnimationsFor(sprite) {
       return {
         "moving-left" : new Animation(sprite, animleft),
@@ -86,18 +102,8 @@
         "moving-rightup" : new Animation(sprite, animright),
         "moving-rightdown" : new Animation(sprite, animright),
 
-        "standing-": new Animation(sprite, animright),
-        "standing-up" : new Animation(sprite, animright),
-        "standing-down" : new Animation(sprite, animright),
-
-        "standing-left" : new Animation(sprite, animleft),
-        "standing-right" : new Animation(sprite, animright),
-
-        "standing-leftup" : new Animation(sprite, animleft),
-        "standing-rightup" : new Animation(sprite, animright),
-
-        "standing-leftdown" : new Animation(sprite, animleft),
-        "standing-rightdown" : new Animation(sprite, animright)
+        "standing": new Animation(sprite, animright),
+        "dead": new Animation(sprite, animdead)
       };
     }
     

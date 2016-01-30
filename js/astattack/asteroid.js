@@ -7,7 +7,7 @@
   namespace.Asteroid = function(x, y) {
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
-    var healthPoints = 100;
+    var healthPoints = 1;
     var X_SPEED = 3;
     var Y_SPEED = 3;
     var physic = new SolidPhysicObject(x, y, 45, 45, "asteroid");
@@ -42,7 +42,7 @@
           },
           transitions: {
             "destroyed": "destroyed",
-            "hitByProjectile" : "standing",
+            "hitByProjectile" : "hitted",
             "moveLeft": "moving",
             "moveRight": "moving",
             "moveUp": "moving",
@@ -50,9 +50,24 @@
           }
         },
 
-        "destroyed" : {
+        "hitted" : {
           action: function() {
-            console.log("i am dead");
+            healthPoints = healthPoints - 1; 
+            if(healthPoints <= 0){
+              statesMachine.applyTransition("die");
+            } else {
+              statesMachine.applyTransition("recover");
+            }
+          },
+          transitions: {
+            "recover" : "standing",
+            "die" : "dead"
+          }
+        },
+
+        "dead" : {
+          action: function() {
+            callbacks.emit("dead");
             physic.velocityX(0);
             physic.velocityY(0);
           }
@@ -70,14 +85,7 @@
         "moveUp": function()    { directionY = "up";    isOutOfScreenTop() ? physic.velocityY(Y_SPEED) : physic.velocityY(0); },
         "moveDown": function()  { directionY = "down";  isOutOfScreenBottom() ? physic.velocityY(-1*Y_SPEED) : physic.velocityY(0); },
         "stopX": function()     { directionX = "";      physic.velocityX(0); },
-        "stopY": function()     { directionY = "";      physic.velocityY(0); },
-        "hitByProjectile": function() { 
-          healthPoints = healthPoints - 1; 
-          if(healthPoints <= 0){
-            callbacks.emit("lifeOver");
-            statesMachine.applyTransition("destroyed");
-          }
-        }
+        "stopY": function()     { directionY = "";      physic.velocityY(0); }
       }
     });
 

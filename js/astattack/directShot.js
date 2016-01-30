@@ -4,11 +4,15 @@
   var Callbacks = LNXCommons.CallbackHelper;
   var Timing = LNXCommons.Timing;
 
-  namespace.DirectShot = function(x, y, vx, vy) {
+  namespace.DirectShot = function(x, y, vx, vy, type) {
     var self = this;
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
-    var physic = new SolidPhysicObject(x, y, 20, 20, "shot");
+    var physic = null;
+    if(type == "linear")
+      physic = new SolidPhysicObject(x, y, 13, 10, "shot");
+    else
+      physic = new SolidPhysicObject(x, y, 10, 10, "shot");
 
     var statesMachine = new StateMachine({
       start: "flying",

@@ -55,7 +55,7 @@
         "shootProjectile" : function(){
           var rotVec = angleToVector(angle);
           var shotVec = angleToVector((angle+120)%360);
-          shotController.create(physic.x+rotVec.x*20, physic.y+rotVec.y*20, shotVec.x*SHOT_SPEED, shotVec.y*SHOT_SPEED);
+          shotController.create(physic.x+rotVec.x*20, physic.y+rotVec.y*20, shotVec.x*SHOT_SPEED, shotVec.y*SHOT_SPEED, "circular");
           angle = (angle + 60) % 360;
         }
       }

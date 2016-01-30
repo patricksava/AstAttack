@@ -2,7 +2,7 @@
   var Animation = LNXGames.Animation;
   var Callbacks = LNXCommons.CallbackHelper;
 
-  namespace.DirectShotGraphics = function(container) {
+  namespace.DirectShotGraphics = function(container, type) {
     var callbacks = Callbacks.initializeFor(this);
     var self = this;
     var animation = null;
@@ -12,7 +12,13 @@
     var animationName = null;
 
     function init() {
-      tex = PIXI.loader.resources["./img/metroid2.png"].texture.clone();
+      if(type == "linear")
+        tex = PIXI.loader.resources["./img/cyan_radial.png"].texture.clone();
+      else if(type == "circular")
+        tex = PIXI.loader.resources["./img/cyan_ball.png"].texture.clone();
+      else
+        tex = PIXI.loader.resources["./img/red_ball.png"].texture.clone();
+      
       sprite = new PIXI.Sprite(tex);
       animations = createAnimationsFor(sprite);
       animations["implode"].listen("animationEnd", function() {
@@ -46,26 +52,10 @@
     function createAnimationsFor(sprite) {
       return {
         "flying" : new Animation(sprite, [
-          {duration: 5, x: 6   + 38*1, y: 435, width: 25, height: 15},
-          {duration: 5, x: 6   + 38*2, y: 435, width: 25, height: 15},
-          {duration: 5, x: 129 + 44*0, y: 435, width: 25, height: 15},
-          {duration: 5, x: 129 + 44*1, y: 435, width: 25, height: 15},
-          {duration: 5, x: 129 + 44*2, y: 435, width: 25, height: 15},
-          {duration: 5, x: 252 + 47*0, y: 435, width: 25, height: 15},
-          {duration: 5, x: 252 + 47*1, y: 435, width: 25, height: 15},
-          {duration: 5, x: 252 + 47*2, y: 435, width: 25, height: 15},
-          {duration: 5, x: 252 + 47*3, y: 435, width: 25, height: 15}
+          {duration: 5, x: 0, y: 0, width: 10, height: 10}
         ]),
         "implode" : new Animation(sprite, [
-          {flip: true, duration: 5, x: 6   + 38*1, y: 435, width: 25, height: 25},
-          {flip: true, duration: 5, x: 6   + 38*2, y: 435, width: 25, height: 25},
-          {flip: true, duration: 5, x: 129 + 44*0, y: 435, width: 25, height: 25},
-          {flip: true, duration: 5, x: 129 + 44*1, y: 435, width: 25, height: 25},
-          {flip: true, duration: 5, x: 129 + 44*2, y: 435, width: 25, height: 25},
-          {flip: true, duration: 5, x: 252 + 47*0, y: 435, width: 25, height: 25},
-          {flip: true, duration: 5, x: 252 + 47*1, y: 435, width: 25, height: 25},
-          {flip: true, duration: 5, x: 252 + 47*2, y: 435, width: 25, height: 25},
-          {flip: true, duration: 5, x: 252 + 47*3, y: 435, width: 25, height: 25}
+          {duration: 5, x: 0, y: 0, width: 10, height: 10}
         ])
       };
     }

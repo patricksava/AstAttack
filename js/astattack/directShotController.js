@@ -10,10 +10,10 @@
     var allGraphics = {};
     var lastShotId = 0;
 
-    this.create = function(x, y, vx, vy) {
+    this.create = function(x, y, vx, vy, type) {
       var id = lastShotId++;
-      var shot = new DirectShot(x, y, vx, vy);
-      var shotGraphics = new DirectShotGraphics(container);
+      var shot = new DirectShot(x, y, vx, vy, type);
+      var shotGraphics = new DirectShotGraphics(container, type);
 
       shot.listen("stateChange", shotGraphics.changeAnimationToCompatibleWithState);
 

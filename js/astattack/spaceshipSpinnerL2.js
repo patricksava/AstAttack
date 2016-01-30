@@ -57,7 +57,7 @@
             var shotAngle = angle + i*20;
             var rotVec = angleToVector(shotAngle);
             var shotVec = angleToVector((shotAngle+120)%360);
-            shotController.create(physic.x+rotVec.x*20, physic.y+rotVec.y*20, shotVec.x*SHOT_SPEED, shotVec.y*SHOT_SPEED);
+            shotController.create(physic.x+rotVec.x*20, physic.y+rotVec.y*20, shotVec.x*SHOT_SPEED, shotVec.y*SHOT_SPEED, "circular");
           }
           angle = (angle + 75) % 360;
         }

@@ -56,8 +56,8 @@
         "shootProjectile" : function(){
           var vec1 = angleToVector(165);
           var vec2 = angleToVector(195);
-          shotController.create(physic.x-1, physic.y, vec1.x*SHOT_SPEED, vec1.y*SHOT_SPEED);
-          shotController.create(physic.x-1, physic.y, vec1.x*SHOT_SPEED, vec2.y*SHOT_SPEED);
+          shotController.create(physic.x-1, physic.y, vec1.x*SHOT_SPEED, vec1.y*SHOT_SPEED, "circular");
+          shotController.create(physic.x-1, physic.y, vec1.x*SHOT_SPEED, vec2.y*SHOT_SPEED, "circular");
         }
       }
     });

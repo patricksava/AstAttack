@@ -14,7 +14,7 @@
     "400" : [[900, 300, "diagonal_up"]],
     "200" : [[900, 300, "diagonal_down"]],
     "400" : [[900, 400, "diagonal_down"]],
-    "1000" :  ["earth"]
+    "1400" :  ["earth"]
   };
 
   namespace.SpaceScene = function(renderer, goToScene) {
@@ -48,8 +48,7 @@
 
       game.asteroid.listen("dead", function() {
         asteroidGraphics.listen("deadAnimationEnd", function() {
-          //TODO: talvez acabar a partida ou recomecar com outro asteroide
-          console.log("Game Over... but at least you still have your home Planet.");
+          goToScene("losing");
           destroyAsteroid();
         });
       });

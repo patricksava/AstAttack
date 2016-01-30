@@ -6,7 +6,8 @@
   var SCENES = {
     "start": LNXAstAttack.StartScene,
     "space": LNXAstAttack.SpaceScene,
-    "ending": LNXAstAttack.EndingScene
+    "ending": LNXAstAttack.EndingScene,
+    "losing": LNXAstAttack.LosingScene
   };
 
   namespace.GameLoop = function() {

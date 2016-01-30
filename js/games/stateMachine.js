@@ -5,9 +5,9 @@
   namespace.StateMachine = function(opts) {
     var callbacks = Callbacks.initializeFor(this);
     var states = opts && opts.states;
-    var passiveTransitions = opts && opts.passiveTransitions;
-    var activeTransitions = opts && opts.activeTransitions;
-    var timedTransitions = opts && opts.timedTransitions;
+    var passiveTransitions = opts && opts.passiveTransitions || {};
+    var activeTransitions = opts && opts.activeTransitions || {};
+    var timedTransitions = opts && opts.timedTransitions || {};
     var current = opts && opts.start;
     var chains = {};
     var self = this;

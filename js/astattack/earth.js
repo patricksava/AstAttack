@@ -2,33 +2,35 @@
   var SolidPhysicObject = LNXGames.SolidPhysicObject;
   var StateMachine = LNXGames.StateMachine;
   var Callbacks = LNXCommons.CallbackHelper;
+  var Config = LNXGames.Config;
 
-  namespace.DirectShot = function(x, y, vx, vy) {
+  namespace.Earth = function(x) {
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
-    var physic = new SolidPhysicObject(x, y, 5, 5, "shot");
+    var physic = new SolidPhysicObject(x, Config.screenHeight(), Config.screenWidth(), Config.screenHeight(), "earth");
     var statesMachine = new StateMachine({
-      start: "flying",
+      start: "alive",
       states: {
-        "flying" : {
+        "alive" : {
           action: function() {
-            physic.velocityX(vx);
-            physic.velocityY(vy);
+            physic.velocityX(-1);
+            physic.velocityY(0);
           },
           transitions: {
-            "implode": "implode"
+            "hit": "explode"
           }
         },
-        "implode" : {
+        "explode" : {
           action: function() {
             physic.velocityX(0);
             physic.velocityY(0);
-          }
+          },
+          transitions: {}
         }
       },
           
       passiveTransitions: [
-        "implode"
+        "hit"
       ]
     });
 

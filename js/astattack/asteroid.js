@@ -109,8 +109,10 @@
       physic.listen("collision", function(obj) {
         if(obj.type === "shot"){
           statesMachine.applyTransition("hitByProjectile");
-        }else if(obj.type === "ship"){
+        } else if(obj.type === "ship"){
           callbacks.emit("shipDestroyed");
+        } else if(obj.type === "earth"){
+          callbacks.emit("earthHitted");
         }
       });
 

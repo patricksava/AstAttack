@@ -5,6 +5,7 @@
   var SpaceshipGraphics = LNXAstAttack.SpaceshipGraphics;
   var ShipController = LNXAstAttack.ShipController;
   var ShotController = LNXAstAttack.DirectShotController;
+  var EarthController = LNXAstAttack.EarthController;
   var Config = LNXGames.Config;
   var SHIPS = {
     "300" : [[900, 200, "straight"]],
@@ -13,6 +14,7 @@
     "400" : [[900, 300, "diagonal_up"]],
     "200" : [[900, 300, "diagonal_down"]],
     "400" : [[900, 400, "diagonal_down"]],
+    "1000" :  ["earth"]
   };
 
   namespace.SpaceScene = function(renderer, goToScene) {
@@ -22,6 +24,7 @@
     var spaceshipGraphics = null;
     var shipController = null;
     var shotController = null;
+    var earthController = null;
     var container = null;
 
     this.start = function() {
@@ -39,6 +42,10 @@
         game.score = game.score + 20;
       });
 
+      game.asteroid.listen("earthHitted", function() {
+        earthController.hit();
+      });
+
       game.asteroid.listen("dead", function() {
         asteroidGraphics.listen("deadAnimationEnd", function() {
           //TODO: talvez acabar a partida ou recomecar com outro asteroide
@@ -53,6 +60,7 @@
 
       shotController = new ShotController(container, game.universe)
       shipController = new ShipController(container, game.universe, shotController);
+      earthController = new EarthController(container, game.universe);
       game.init();
     };
 
@@ -61,7 +69,11 @@
       if(ships) {
         for(var i = 0; i < ships.length; i++) {
           var params = ships[i];
-          shipController.create(params[0], params[1], params[2], params[3]);
+          if(params === "earth") {
+            earthController.create(finishScene);
+          } else {
+            shipController.create(params[0], params[1], params[2], params[3]);
+          }
         }
       }
 
@@ -69,6 +81,7 @@
       //console.log("Asteroid HP: " + game.asteroid.healthPoints());
       shipController.updateAll();
       shotController.updateAll();
+      earthController.update();
 
       var noMoves = true;
       if(Controls.isPressed("right")) {
@@ -111,6 +124,10 @@
     function destroyAsteroid() {
       game.universe.destroy(game.asteroid.physic());
       asteroidGraphics.destroy();
+    }
+
+    function finishScene() {
+      goToScene("start");
     }
   };
 

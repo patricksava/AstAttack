@@ -54,19 +54,7 @@
       }
     };
 
-    var animleft = [
-      {flip: true, duration: 5, x: 6   + 38*1, y: 435, width: 38, height: 45},
-      {flip: true, duration: 5, x: 6   + 38*2, y: 435, width: 38, height: 45},
-      {flip: true, duration: 5, x: 129 + 44*0, y: 435, width: 44, height: 45},
-      {flip: true, duration: 5, x: 129 + 44*1, y: 435, width: 44, height: 45},
-      {flip: true, duration: 5, x: 129 + 44*2, y: 435, width: 44, height: 45},
-      {flip: true, duration: 5, x: 252 + 47*0, y: 435, width: 47, height: 45},
-      {flip: true, duration: 5, x: 252 + 47*1, y: 435, width: 47, height: 45},
-      {flip: true, duration: 5, x: 252 + 47*2, y: 435, width: 47, height: 45},
-      {flip: true, duration: 5, x: 252 + 47*3, y: 435, width: 47, height: 45}
-    ];
-
-   var animright = [
+   var animmoving = [
       {duration: 5, x: 6   + 38*1, y: 435, width: 38, height: 45},
       {duration: 5, x: 6   + 38*2, y: 435, width: 38, height: 45},
       {duration: 5, x: 129 + 44*0, y: 435, width: 44, height: 45},
@@ -92,17 +80,17 @@
 
     function createAnimationsFor(sprite) {
       return {
-        "moving-left" : new Animation(sprite, animleft),
-        "moving-right" : new Animation(sprite, animright),
-        "moving-up" : new Animation(sprite, animleft),
-        "moving-down" : new Animation(sprite, animleft),
+        "moving-left" : new Animation(sprite, animmoving),
+        "moving-right" : new Animation(sprite, animmoving),
+        "moving-up" : new Animation(sprite, animmoving),
+        "moving-down" : new Animation(sprite, animmoving),
 
-        "moving-leftup" : new Animation(sprite, animleft),
-        "moving-leftdown" : new Animation(sprite, animleft),
-        "moving-rightup" : new Animation(sprite, animright),
-        "moving-rightdown" : new Animation(sprite, animright),
+        "moving-leftup" : new Animation(sprite, animmoving),
+        "moving-leftdown" : new Animation(sprite, animmoving),
+        "moving-rightup" : new Animation(sprite, animmoving),
+        "moving-rightdown" : new Animation(sprite, animmoving),
 
-        "standing": new Animation(sprite, animright),
+        "standing": new Animation(sprite, animmoving),
         "dead": new Animation(sprite, animdead)
       };
     }

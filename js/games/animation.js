@@ -15,15 +15,9 @@
         currentImageIndex = (currentImageIndex + 1) % images.length;
         framesOfCurrentImage = images[currentImageIndex].duration;
       }
-      if(images[currentImageIndex].flip) {
-        sprite.scale.x = -1;
-        sprite.x = x + sprite.width;
-        sprite.y = y;
-      } else {
-        sprite.scale.x = 1;
-        sprite.x = x;
-        sprite.y = y;
-      }
+      sprite.x = x;
+      sprite.y = y;
+
       if(currentImageIndex == images.length - 1) {
         callbacks.emit("animationEnd");
       }

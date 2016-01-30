@@ -6,12 +6,12 @@
   var ShipController = LNXAstAttack.ShipController;
   var ShotController = LNXAstAttack.DirectShotController;
   var SHIPS = {
-    "300" : [[640, 200, "simple"]],
-    "320" : [[640, 100, "simple"]],
-    "340" : [[640, 220, "simple"]],
-    "400" : [[640, 300, "simple"]],
-    "200" : [[640, 300, "simple"]],
-    "400" : [[640, 300, "simple"]],
+    "300" : [[640, 200, "straight"]],
+    "320" : [[640, 100, "straight"]],
+    "340" : [[640, 220, "diagonal_up"]],
+    "400" : [[640, 300, "diagonal_up"]],
+    "200" : [[640, 300, "diagonal_down"]],
+    "400" : [[640, 300, "diagonal_down"]],
   };
 
   namespace.GameLoop = function() {
@@ -71,7 +71,7 @@
       if(ships) {
         for(var i = 0; i < ships.length; i++) {
           var params = ships[i];
-          shipController.create(params[0], params[1], params[2]);
+          shipController.create(params[0], params[1], params[2], params[3]);
         }
       }
 

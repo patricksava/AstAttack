@@ -22,6 +22,11 @@
       animations[animationName].toNextFrame(x, y);
     };
 
+    this.destroy = function() {
+      container.removeChild(sprite);
+      sprite.destroy();
+    }
+
     this.changeAnimationToCompatibleWithState = function(state, directionX, directionY) {
       var direction = directionX+directionY;
       var name = animationNameFor(state, direction);

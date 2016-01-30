@@ -11,16 +11,18 @@
       start: -3,
       frequency: {
         "straight" : 4,
-        "double" : 7,
-        "spinner" : 10,
-        "spinnerl2" : 13
+        "double" : 5,
+        "spinner" : 6,
+        "spinnerl2" : 7
       }
     },
     {
       start: 10,
       frequency: {
-        "straight" : 2.87,
-        //"double" : 8
+        "straight" : 2,
+        "double" : 2.5,
+        "spinner" : 3,
+        "spinnerl2" : 3.5
       }
     },
     {

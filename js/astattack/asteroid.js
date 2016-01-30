@@ -25,7 +25,7 @@
           },
           transitions: {
             "destroyed": "destroyed",
-            "hitByProjectile" : "moving",
+            "hitByProjectile" : "hit",
             "stop": "standing",
             "stopX": "moving",
             "stopY": "moving",

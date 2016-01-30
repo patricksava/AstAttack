@@ -21,6 +21,11 @@
         shotGraphics.update(this.x, Config.screenHeight()-this.y);
       });
 
+
+      shot.physic().listen("outOfScreen", function() {
+        self.destroy(id);
+      });
+
       shotGraphics.listen("implodeAnimationEnd", function() {
         self.destroy(id);
       });

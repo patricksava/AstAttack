@@ -39,6 +39,10 @@
         }
       });
 
+      ship.physic().listen("outOfScreen", function() {
+        self.destroy(id);
+      });
+
       shipGraphics.listen("explodingEnd", function() {
         ship.act("end");
       });

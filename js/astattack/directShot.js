@@ -2,13 +2,17 @@
   var SolidPhysicObject = LNXGames.SolidPhysicObject;
   var StateMachine = LNXGames.StateMachine;
   var Callbacks = LNXCommons.CallbackHelper;
+  var Timing = LNXCommons.Timing;
 
   namespace.DirectShot = function(x, y, vx, vy) {
+    var self = this;
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
     var physic = new SolidPhysicObject(x, y, 20, 20, "shot");
+
     var statesMachine = new StateMachine({
       start: "flying",
+
       states: {
         "flying" : {
           action: function() {

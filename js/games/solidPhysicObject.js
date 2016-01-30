@@ -1,5 +1,6 @@
 (function(namespace) {
   var Callbacks = LNXCommons.CallbackHelper;
+  var Config = LNXGames.Config;
 
   var nextId = 1;
   namespace.SolidPhysicObject = function(x, y, width, height, type) {
@@ -52,6 +53,10 @@
       this.vel.y += this.accel.y;
       this.x += this.vel.x;
       this.y += this.vel.y;
+      if(this.x < -200 || this.x > Config.screenWidth() + 200
+          || this.y < -200 || this.y > Config.screenHeight() + 200) {
+        callbacks.emit("outOfScreen");
+      }
     };
 
     this.emitUpdated = function() {

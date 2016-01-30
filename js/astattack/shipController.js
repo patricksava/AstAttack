@@ -1,8 +1,18 @@
 (function(namespace) {
   var SpaceshipGraphics = LNXAstAttack.SpaceshipGraphics;
   var Spaceship = LNXAstAttack.Spaceship;
+  var SpaceshipL2 = LNXAstAttack.SpaceshipL2;
+  var SpaceshipSpinner = LNXAstAttack.SpaceshipSpinner;
+  var SpaceshipSpinnerL2 = LNXAstAttack.SpaceshipSpinnerL2;
   var Config = LNXGames.Config;
   var ships = [];
+
+  var TYPES = {
+    "straight": {model: Spaceship, graphics: SpaceshipGraphics},
+    "double": {model: SpaceshipL2, graphics: SpaceshipGraphics},
+    "spinner": {model: SpaceshipSpinner, graphics: SpaceshipGraphics},
+    "spinnerl2": {model: SpaceshipSpinnerL2, graphics: SpaceshipGraphics}
+  };
 
   namespace.ShipController = function(container, universe, shotController) {
     var self = this;
@@ -11,10 +21,12 @@
     var lastShipId = 0;
 
     this.create = function(x, y, type) {
+      var typeConstructors = TYPES[type];
+      var Ship = typeConstructors.model;
+      var ShipGraphics = typeConstructors.graphics;
       var id = lastShipId++;
-      console.log("created ", type, " on ", x, y);
-      var ship = new Spaceship(x, y, shotController, type);
-      var shipGraphics = new SpaceshipGraphics(container);
+      var ship = new Ship(x, y, shotController);
+      var shipGraphics = new ShipGraphics(container);
 
       ship.listen("stateChange", shipGraphics.changeAnimationToCompatibleWithState);
       ship.listen("dead", function() {

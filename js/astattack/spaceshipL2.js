@@ -3,7 +3,7 @@
   var StateMachine = LNXGames.StateMachine;
   var Callbacks = LNXCommons.CallbackHelper;
 
-  namespace.Spaceship = function(x, y, shotCont) {
+  namespace.SpaceshipL2 = function(x, y, shotCont) {
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
     var shotController = shotCont;
@@ -51,7 +51,8 @@
       
       activeTransitions: { 
         "shootProjectile" : function(){
-          shotController.create(physic.x-1, physic.y, -2, 0);
+          shotController.create(physic.x-1, physic.y, -2, 0.5);
+          shotController.create(physic.x-1, physic.y, -2, -0.5);
         }
       }
     });

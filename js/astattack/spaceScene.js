@@ -2,32 +2,29 @@
   var Game = LNXAstAttack.Game;
   var Controls = LNXGames.Controls;
   var AsteroidGraphics = LNXAstAttack.AsteroidGraphics;
-  var SpaceshipGraphics = LNXAstAttack.SpaceshipGraphics;
   var ShipController = LNXAstAttack.ShipController;
   var ShotController = LNXAstAttack.DirectShotController;
   var EarthController = LNXAstAttack.EarthController;
   var Config = LNXGames.Config;
   var TIMELINE = [
     {
-      start: 0,
+      start: -3,
       frequency: {
-        "straight" : 4,
+        "spinnerl2" : 4,
       }
     },
     {
       start: 10,
       frequency: {
         "straight" : 2.87,
-        "diagonal_up" : 8,
-        "diagonal_down" : 8,
+        //"double" : 8
       }
     },
     {
       start: 20,
       frequency: {
         "straight" : 2,
-        "diagonal_up" : 5,
-        "diagonal_down" : 5,
+        //"double" : 5
       }
     },
     {
@@ -47,7 +44,6 @@
     var container = null;
 
     var happenings = timelineToShips(TIMELINE);
-    //console.log(happenings);
 
     this.start = function() {
       container = new PIXI.Container();

@@ -1,6 +1,7 @@
 (function(namespace) {
   var SpaceshipGraphics = LNXAstAttack.SpaceshipGraphics;
   var Spaceship = LNXAstAttack.Spaceship;
+  var Game = LNXAstAttack.Game;
   var ships = [];
 
   namespace.ShipController = function(container, universe, shotController) {
@@ -12,7 +13,7 @@
       ship.listen("stateChange", shipGraphics.changeAnimationToCompatibleWithState);
 
       ship.physic().listen("update", function() {
-        shipGraphics.update(this.x, 480-this.y);
+        shipGraphics.update(this.x, 600 - this.y);
       });
       universe.push(ship.physic());
       ship.init();

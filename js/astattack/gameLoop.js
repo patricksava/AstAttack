@@ -1,5 +1,5 @@
 (function(namespace) {
-  var Game = LNXGdie.Game;
+  var Game = LNXAstAttack.Game;
   var Controls = LNXGames.Controls;
   var AsteroidGraphics = LNXAstAttack.AsteroidGraphics;
   var SpaceshipGraphics = LNXAstAttack.SpaceshipGraphics;
@@ -107,4 +107,4 @@
     };
   };
 
-}(LNXGdie = window.LNXGdie || {}));
+}(LNXAstAttack = window.LNXAstAttack || {}));

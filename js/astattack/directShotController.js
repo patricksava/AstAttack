@@ -1,6 +1,7 @@
 (function(namespace) {
   var DirectShotGraphics = LNXAstAttack.DirectShotGraphics;
   var DirectShot = LNXAstAttack.DirectShot;
+  var Game = LNXAstAttack.Game;
   var shots = [];
 
   namespace.DirectShotController = function(container, universe) {
@@ -27,7 +28,7 @@
       shot.listen("stateChange", shotGraphics.changeAnimationToCompatibleWithState);
 
       shot.physic().listen("update", function() {
-        shotGraphics.update(this.x, 480-this.y);
+        shotGraphics.update(this.x, 600-this.y);
       });
       universe.push(shot.physic());
       shot.init();

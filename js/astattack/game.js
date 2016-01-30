@@ -9,6 +9,7 @@
 
     this.windowWidth = 800;
     this.windowHeight = 600;
+    
     this.score = 0;
     this.universe = new UniversalPhysic();
     this.asteroid = new Asteroid(100, 200);
@@ -24,4 +25,8 @@
       self.asteroid.update();
     };
   };
-}(LNXGdie = window.LNXGdie || {}));
+
+  
+
+
+}(LNXAstAttack = window.LNXAstAttack || {}));

@@ -3,6 +3,16 @@
   var Controls = LNXGames.Controls;
   var AsteroidGraphics = LNXAstAttack.AsteroidGraphics;
   var SpaceshipGraphics = LNXAstAttack.SpaceshipGraphics;
+  var ShipController = LNXAstAttack.ShipController;
+  var ShotController = LNXAstAttack.DirectShotController;
+  var SHIPS = {
+    "300" : [[640, 200, "simple"]],
+    "320" : [[640, 100, "simple"]],
+    "340" : [[640, 220, "simple"]],
+    "400" : [[640, 300, "simple"]],
+    "200" : [[640, 300, "simple"]],
+    "400" : [[640, 300, "simple"]],
+  };
 
   namespace.GameLoop = function() {
     var container = null;
@@ -11,8 +21,12 @@
     var game = null;
     var asteroidGraphics = null;
     var spaceshipGraphics = null;
+    var shipController = null;
+    var shotController = null;
+    var frameCount = 0;
 
     this.start = function() {
+      frameCount = 0;
       container = new PIXI.Container();
       asteroidGraphics = new AsteroidGraphics(container);
       renderer = PIXI.autoDetectRenderer(640, 480, {
@@ -44,12 +58,25 @@
         asteroidGraphics.update(this.x-10, 480-this.y);
       });
 
+      shotController = new ShotController(container, game.universe)
+      shipController = new ShipController(container, game.universe, shotController);
       game.init();
       requestAnimationFrame(self.update);
     };
 
     this.update = function() {
       requestAnimationFrame(self.update);
+      frameCount++;
+      var ships = SHIPS[frameCount];
+      if(ships) {
+        for(var i = 0; i < ships.length; i++) {
+          var params = ships[i];
+          shipController.create(params[0], params[1], params[2]);
+        }
+      }
+
+      shipController.updateAll();
+      shotController.updateAll();
 
       var noMoves = true;
       if(Controls.isPressed("right")) {
@@ -77,9 +104,9 @@
       if(noMoves)
         game.asteroid.act("stop");
 
-
       game.update();
       renderer.render(container);
     };
   };
+
 }(LNXGdie = window.LNXGdie || {}));

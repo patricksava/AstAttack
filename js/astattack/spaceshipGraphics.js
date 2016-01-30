@@ -1,7 +1,7 @@
 (function(namespace) {
   var Animation = LNXGames.Animation;
 
-  namespace.AsteroidGraphics = function(container) {
+  namespace.SpaceshipGraphics = function(container) {
     var self = this;
     var animation = null;
     var tex = null;
@@ -10,7 +10,7 @@
     var animationName = null;
 
     function init() {
-      tex = PIXI.loader.resources["./img/metroid2.png"].texture;
+      tex = PIXI.loader.resources["./img/metroid2.png"].texture.clone();
       sprite = new PIXI.Sprite(tex);
       animations = createAnimationsFor(sprite);
       sprite.x = -9999;
@@ -33,15 +33,6 @@
       animationName = animName;
     }
 
-    function animationNameFor(state, direction) {
-      var animationPrefix = {
-        "moving" : "moving",
-        "exploding" : "exploding"
-      };
-
-      return animationPrefix[state];
-    };
-
     function createAnimationsFor(sprite) {
       return {
         "moving" : new Animation(sprite, [
@@ -58,6 +49,7 @@
         ]),
 
         "exploding" : new Animation(sprite, [
+          {duration: 2, x: 7  , y: 540, width: 45, height: 49}
           //TODO: exploding animation
         ]),
       };
@@ -65,4 +57,4 @@
     
     init();
   };
-}(LNXGdie = window.LNXGdie || {}));
+}(LNXAstAttack = window.LNXAstAttack || {}));

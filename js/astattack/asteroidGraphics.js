@@ -45,136 +45,54 @@
       return animationPrefix[state] + "-" + direction;
     };
 
+    var animleft = [
+      {flip: true, duration: 5, x: 6   + 38*1, y: 435, width: 38, height: 45},
+      {flip: true, duration: 5, x: 6   + 38*2, y: 435, width: 38, height: 45},
+      {flip: true, duration: 5, x: 129 + 44*0, y: 435, width: 44, height: 45},
+      {flip: true, duration: 5, x: 129 + 44*1, y: 435, width: 44, height: 45},
+      {flip: true, duration: 5, x: 129 + 44*2, y: 435, width: 44, height: 45},
+      {flip: true, duration: 5, x: 252 + 47*0, y: 435, width: 47, height: 45},
+      {flip: true, duration: 5, x: 252 + 47*1, y: 435, width: 47, height: 45},
+      {flip: true, duration: 5, x: 252 + 47*2, y: 435, width: 47, height: 45},
+      {flip: true, duration: 5, x: 252 + 47*3, y: 435, width: 47, height: 45}
+    ];
+
+   var animright = [
+      {duration: 5, x: 6   + 38*1, y: 435, width: 38, height: 45},
+      {duration: 5, x: 6   + 38*2, y: 435, width: 38, height: 45},
+      {duration: 5, x: 129 + 44*0, y: 435, width: 44, height: 45},
+      {duration: 5, x: 129 + 44*1, y: 435, width: 44, height: 45},
+      {duration: 5, x: 129 + 44*2, y: 435, width: 44, height: 45},
+      {duration: 5, x: 252 + 47*0, y: 435, width: 47, height: 45},
+      {duration: 5, x: 252 + 47*1, y: 435, width: 47, height: 45},
+      {duration: 5, x: 252 + 47*2, y: 435, width: 47, height: 45},
+      {duration: 5, x: 252 + 47*3, y: 435, width: 47, height: 45}
+    ];
+
     function createAnimationsFor(sprite) {
       return {
-        "moving-left" : new Animation(sprite, [
-          {duration: 2, x: 7  , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 45 , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 90 , y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 147, y: 544, width: 44, height: 49},
-          {duration: 2, x: 7 + 188, y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 241, y: 544, width: 40, height: 49},
-          {duration: 2, x: 7 + 275, y: 542, width: 45, height: 49},
-          {duration: 2, x: 7 + 315, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 360, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 405, y: 540, width: 45, height: 49}
-        ]),
-        "moving-right" : new Animation(sprite, [
-          {flip: true, duration: 2, x: 7  , y: 540, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 45 , y: 540, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 90 , y: 544, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 147, y: 544, width: 44, height: 49},
-          {flip: true, duration: 2, x: 7 + 188, y: 544, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 241, y: 544, width: 40, height: 49},
-          {flip: true, duration: 2, x: 7 + 275, y: 542, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 315, y: 540, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 360, y: 540, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 405, y: 540, width: 45, height: 49}
-        ]),
-        "moving-up" : new Animation(sprite, [
-          {flip: true, duration: 2, x: 7  , y: 540, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 45 , y: 540, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 90 , y: 544, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 147, y: 544, width: 44, height: 49},
-          {flip: true, duration: 2, x: 7 + 188, y: 544, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 241, y: 544, width: 40, height: 49},
-          {flip: true, duration: 2, x: 7 + 275, y: 542, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 315, y: 540, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 360, y: 540, width: 45, height: 49},
-          {flip: true, duration: 2, x: 7 + 405, y: 540, width: 45, height: 49}
-        ]),
-        "moving-down" : new Animation(sprite, [
-          {duration: 2, x: 7  , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 45 , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 90 , y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 147, y: 544, width: 44, height: 49},
-          {duration: 2, x: 7 + 188, y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 241, y: 544, width: 40, height: 49},
-          {duration: 2, x: 7 + 275, y: 542, width: 45, height: 49},
-          {duration: 2, x: 7 + 315, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 360, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 405, y: 540, width: 45, height: 49}
-        ]),
+        "moving-left" : new Animation(sprite, animleft),
+        "moving-right" : new Animation(sprite, animright),
+        "moving-up" : new Animation(sprite, animleft),
+        "moving-down" : new Animation(sprite, animleft),
 
-        "moving-leftup" : new Animation(sprite, [
-          {duration: 2, x: 7  , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 45 , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 90 , y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 147, y: 544, width: 44, height: 49},
-          {duration: 2, x: 7 + 188, y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 241, y: 544, width: 40, height: 49},
-          {duration: 2, x: 7 + 275, y: 542, width: 45, height: 49},
-          {duration: 2, x: 7 + 315, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 360, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 405, y: 540, width: 45, height: 49}
-        ]),
-        "moving-leftdown" : new Animation(sprite, [
-          {duration: 2, x: 7  , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 45 , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 90 , y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 147, y: 544, width: 44, height: 49},
-          {duration: 2, x: 7 + 188, y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 241, y: 544, width: 40, height: 49},
-          {duration: 2, x: 7 + 275, y: 542, width: 45, height: 49},
-          {duration: 2, x: 7 + 315, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 360, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 405, y: 540, width: 45, height: 49}
-        ]),
-        "moving-rightup" : new Animation(sprite, [
-          {duration: 2, x: 7  , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 45 , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 90 , y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 147, y: 544, width: 44, height: 49},
-          {duration: 2, x: 7 + 188, y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 241, y: 544, width: 40, height: 49},
-          {duration: 2, x: 7 + 275, y: 542, width: 45, height: 49},
-          {duration: 2, x: 7 + 315, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 360, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 405, y: 540, width: 45, height: 49}
-        ]),
-        "moving-rightdown" : new Animation(sprite, [
-          {duration: 2, x: 7  , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 45 , y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 90 , y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 147, y: 544, width: 44, height: 49},
-          {duration: 2, x: 7 + 188, y: 544, width: 45, height: 49},
-          {duration: 2, x: 7 + 241, y: 544, width: 40, height: 49},
-          {duration: 2, x: 7 + 275, y: 542, width: 45, height: 49},
-          {duration: 2, x: 7 + 315, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 360, y: 540, width: 45, height: 49},
-          {duration: 2, x: 7 + 405, y: 540, width: 45, height: 49}
-        ]),
+        "moving-leftup" : new Animation(sprite, animleft),
+        "moving-leftdown" : new Animation(sprite, animleft),
+        "moving-rightup" : new Animation(sprite, animright),
+        "moving-rightdown" : new Animation(sprite, animright),
 
-        "standing-": new Animation(sprite, [
-          {duration: 5, x: 24 , y: 785, width: 35, height: 48}
-        ]),
-        "standing-up" : new Animation(sprite, [
-          {duration: 5, x: 24 , y: 785, width: 35, height: 48}
-        ]),
-        "standing-down" : new Animation(sprite, [
-          {flip: true, duration: 5, x: 24 , y: 785, width: 35, height: 48}
-        ]),
+        "standing-": new Animation(sprite, animright),
+        "standing-up" : new Animation(sprite, animright),
+        "standing-down" : new Animation(sprite, animright),
 
-        "standing-left" : new Animation(sprite, [
-          {duration: 5, x: 24 , y: 785, width: 35, height: 48}
-        ]),
-        "standing-right" : new Animation(sprite, [
-          {flip: true, duration: 5, x: 24 , y: 785, width: 35, height: 48}
-        ]),
+        "standing-left" : new Animation(sprite, animleft),
+        "standing-right" : new Animation(sprite, animright),
 
-        "standing-leftup" : new Animation(sprite, [
-          {duration: 5, x: 24 , y: 785, width: 35, height: 48}
-        ]),
-        "standing-rightup" : new Animation(sprite, [
-          {flip: true, duration: 5, x: 24 , y: 785, width: 35, height: 48}
-        ]),
+        "standing-leftup" : new Animation(sprite, animleft),
+        "standing-rightup" : new Animation(sprite, animright),
 
-        "standing-leftdown" : new Animation(sprite, [
-          {duration: 5, x: 24 , y: 785, width: 35, height: 48}
-        ]),
-        "standing-rightdown" : new Animation(sprite, [
-          {flip: true, duration: 5, x: 24 , y: 785, width: 35, height: 48}
-        ]),
+        "standing-leftdown" : new Animation(sprite, animleft),
+        "standing-rightdown" : new Animation(sprite, animright)
       };
     }
     

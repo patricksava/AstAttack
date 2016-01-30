@@ -81,4 +81,4 @@
 
     this.physic = function(){ return physic; };
   };
-}(LNXGdie = window.LNXGdie || {}));
+}(LNXAstAttack = window.LNXAstAttack || {}));

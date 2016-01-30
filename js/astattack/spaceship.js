@@ -11,17 +11,20 @@
     var Y_SPEED = 0;
     var physic = new SolidPhysicObject(x, y, 45, 45, "weak");
     var statesMachine = new StateMachine({
-      start: "standing",
+      start: "moving",
 
       timedTransitions: {
         "shoot": [{"4s": "shootProjectile"}]
       },
 
       states: {
-        "standing" : {
+        "moving" : {
           action: function() {
             physic.velocityX(X_SPEED);
             physic.velocityY(0);
+          },
+          transitions: {
+            "shootProjectile" : "moving"
           }
         },
         
@@ -42,9 +45,14 @@
     });
 
     this.init = function() {
-      physic.listen("hitByAsteroid", function() {
+      physic.listen("collision", function(obj) {
         statesMachine.applyTransition("exploding");
       });
+
+      statesMachine.listen("stateChange", function(newState) {
+        callbacks.emit("stateChange", [newState]);
+      });
+      callbacks.emit("stateChange", [statesMachine.state()]);
     }
 
     this.act = function(action) {

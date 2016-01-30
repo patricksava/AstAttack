@@ -11,7 +11,7 @@
 
       ship.listen("stateChange", shipGraphics.changeAnimationToCompatibleWithState);
 
-      shipt.physic().listen("update", function() {
+      ship.physic().listen("update", function() {
         shipGraphics.update(this.x, 480-this.y);
       });
       universe.push(ship.physic());

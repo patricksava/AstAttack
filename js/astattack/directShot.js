@@ -23,6 +23,7 @@
           action: function() {
             physic.velocityX(0);
             physic.velocityY(0);
+            physic.disable();
           }
         }
       },
@@ -37,6 +38,12 @@
         callbacks.emit("stateChange", [newState]);
       });
       callbacks.emit("stateChange", [statesMachine.state()]);
+
+      physic.listen("collision", function(obj) {
+        if(obj.type === "asteroid") {
+          statesMachine.applyTransition("implode");
+        }
+      });
     }
 
     this.act = function(action) {

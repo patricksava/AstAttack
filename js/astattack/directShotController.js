@@ -3,33 +3,45 @@
   var DirectShot = LNXAstAttack.DirectShot;
   var Game = LNXAstAttack.Game;
   var Config = LNXGames.Config;
-  var shots = [];
 
   namespace.DirectShotController = function(container, universe) {
+    var self = this;
+    var shots = {};
+    var allGraphics = {};
+    var lastShotId = 0;
+
     this.create = function(x, y, vx, vy) {
+      var id = lastShotId++;
       var shot = new DirectShot(x, y, vx, vy);
       var shotGraphics = new DirectShotGraphics(container);
 
       shot.listen("stateChange", shotGraphics.changeAnimationToCompatibleWithState);
 
-      shot.physic().listen("collision", function(obj) {
-        if(obj.type === "asteroid") {
-          shot.physic().disable();
-        }
-      });
-
       shot.physic().listen("update", function() {
         shotGraphics.update(this.x, Config.screenHeight()-this.y);
       });
+
+      shotGraphics.listen("implodeAnimationEnd", function() {
+        self.destroy(id);
+      });
+
       universe.push(shot.physic());
       shot.init();
-      shots.push(shot);
+      shots[id] = shot;
+      allGraphics[id] = shotGraphics;
     };
 
     this.updateAll = function() {
-      for(var i = 0; i < shots.length; i++) {
-        shots[i].update();
+      for(var id in shots) {
+        shots[id].update();
       }
+    };
+
+    this.destroy = function(id) {
+      universe.destroy(shots[id].physic());
+      delete shots[id];
+      allGraphics[id].destroy();
+      delete allGraphics[id];
     };
   };
 }(LNXAstAttack = window.LNXAstAttack || {}));

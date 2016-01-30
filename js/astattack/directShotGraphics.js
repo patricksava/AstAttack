@@ -1,7 +1,9 @@
 (function(namespace) {
   var Animation = LNXGames.Animation;
+  var Callbacks = LNXCommons.CallbackHelper;
 
   namespace.DirectShotGraphics = function(container) {
+    var callbacks = Callbacks.initializeFor(this);
     var self = this;
     var animation = null;
     var tex = null;
@@ -13,6 +15,9 @@
       tex = PIXI.loader.resources["./img/metroid2.png"].texture.clone();
       sprite = new PIXI.Sprite(tex);
       animations = createAnimationsFor(sprite);
+      animations["implode"].listen("animationEnd", function() {
+        callbacks.emit("implodeAnimationEnd");
+      });
       sprite.x = -9999;
       sprite.y = -9999;
       container.addChild(sprite);

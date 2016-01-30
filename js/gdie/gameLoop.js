@@ -46,12 +46,20 @@
 
     this.update = function() {
       requestAnimationFrame(self.update);
-      if(Controls.isPressed("right")) {
-        game.samus.act("moveRight");
-      } else if(Controls.isPressed("left")) {
-        game.samus.act("moveLeft");
-      } else {
+
+      var rightWasReleased = Controls.wasReleased("right");
+      var leftWasReleased = Controls.wasReleased("left");
+      if((rightWasReleased && Controls.isReleased("left")) ||
+         (leftWasReleased && Controls.isReleased("right"))) {
         game.samus.act("stop");
+      }
+
+      if(Controls.wasPressed("right") ||
+          (Controls.isPressed("right") && leftWasReleased)) {
+        game.samus.act("moveRight");
+      } else if(Controls.wasPressed("left") ||
+          (Controls.isPressed("left") && rightWasReleased)) {
+        game.samus.act("moveLeft");
       }
 
       if(Controls.wasPressed("up")) {

@@ -13,7 +13,7 @@
     var statesMachine = new StateMachine({
       start: "standing",
       timedTransitions: {
-        "zigzag": [{"30s": "moveRight"}, {"30s": "moveLeft"}]
+        "zigzag": [{"1s": "moveRight"}, {"1s": "moveLeft"}]
       },
       states: {
         "running" : {

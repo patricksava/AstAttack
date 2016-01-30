@@ -6,7 +6,15 @@
     var states = opts && opts.states;
     var passiveTransitions = opts && opts.passiveTransitions;
     var activeTransitions = opts && opts.activeTransitions;
+    var timedTransitions = opts && opts.timedTransitions;
     var current = opts && opts.start;
+    var chains = {};
+    var self = this;
+
+    for(chainName in timedTransitions) {
+      var timedChain = timedTransitions[chainName];
+      startTimedChain(chainName, timedChain);
+    }
 
     this.applyTransition = function(transition) {
       var availableTransitions = states[current].transitions;
@@ -34,5 +42,47 @@
       }
       current = states[theState].immediateTransition || current;
     };
+
+
+    this.stopTimedTransition = function(name) {
+      clearInterval(chains[name].intervalId);
+      chains[name].intervalId = null;
+    };
+
+    this.restartTimedTransition = function(name) {
+      chains[name].nextTransition = 0;
+      executeNextOnChain(name);
+    };
+
+    function startTimedChain(name, chain) {
+      chains[name] = {
+        "nextTransition" : 0,
+        "intervalId" : null,
+        "transitions" : chain
+      };
+      executeNextOnChain(name);
+    }
+
+    function executeNextOnChain(name) {
+      var chain = chains[name];
+      var transition = timedTransitionFrom(chain.transitions[chain.nextTransition]);
+      transition.intervalId = setTimeout(function() {
+        self.applyTransition(transition.name);
+        chain.nextTransition = (chain.nextTransition + 1) % chain.transitions.length;
+        executeNextOnChain(name)
+      }, transition.time);
+    }
+
+    function timedTransitionFrom(transitionDSL) {
+      for(var timeStr in transitionDSL) {
+        var name = transitionDSL[timeStr];
+      }
+      var seconds = parseInt(timeStr.match(/(\d+)s/)[1], 10);
+      var millis = seconds * 1000;
+      return {
+        name: name,
+        time: millis
+      };
+    }
   };
 }(LNXGames = window.LNXGames || {}));

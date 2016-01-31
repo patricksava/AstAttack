@@ -154,7 +154,7 @@
       hpLabel.y = 0.5;
       container.addChild(hpLabel);
 
-      bgAudio = new Audio("./audio/centroid.ogg");
+      bgAudio = new Audio("./audio/Centroid.ogg");
       
       bgAudio.addEventListener('ended', function() {
         this.currentTime = 0;

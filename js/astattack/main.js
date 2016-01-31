@@ -2,6 +2,10 @@
   var jsloader = new JSLoader(JS_SOURCES);
   gameLoop = new LNXAstAttack.GameLoop();
   gameLoop.start();
+  var lastResProgress = 0;
+  jsloader.onProgress = function(progress) {
+    gameLoop.progress = (progress + lastResProgress)/2;
+  };
   LNXAstAttack.LoadingScene.loader
   .add("./img/loading_screen_mini.jpg")
   .load(function() {
@@ -28,11 +32,15 @@
      .add("./img/explosion/boom3.png")
      .add("./img/explosion/explosion_01_strip13_small.png")
      .add("./img/explosion/explosion_01_strip13_medium.png")
-     .on("progress", function(progress) { gameLoop.progress = (progress.progress + jsloader.progress())/2; })
+     .on("progress", function(progress) {
+       lastResProgress = progress.progress;
+       gameLoop.progress = (progress.progress + jsloader.progress())/2;
+     })
      .load();
   });
 
   function JSLoader(sources) {
+    var self = this;
     var count = 0;
     var nextScript = 0;
 
@@ -55,8 +63,9 @@
     function addScript(src, cb) {
       var script = document.createElement("script");
       script.onload = function() {
-        cb();
         count++;
+        self.onProgress && self.onProgress(self.progress());
+        cb();
       };
       script.src = src;
       document.body.appendChild(script);

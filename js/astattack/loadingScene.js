@@ -29,7 +29,6 @@
 
     this.update = function(frameCount, progress) {
       if(started) {
-        console.log(progress);
         rectangle.width = progress/100 * 412;
         renderer.render(container);
         if(progress >= 99.8) {

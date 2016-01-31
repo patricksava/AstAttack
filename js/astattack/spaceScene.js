@@ -11,24 +11,25 @@
       start: -3,
       frequency: {
         "straight" : 3,
-        "double" : 10,
+        "double" : 8,
       }
     },
-    /*{
+    {
       start: 50,
       frequency: {
         "straight" : 3,
-        "double" : 3,
+        "double" : 7,
+        "spinner" : 10,
       }
     },
     {
       start: 100,
       frequency: {
         "straight" : 2,
-        "double" : 2,
-        "spinner" : 3
+        "double" : 3,
+        "spinnerl2" : 10
       }
-    },
+    },/*
     {
       start: 150,
       frequency: {
@@ -57,7 +58,7 @@
       }
     },*/
     {
-      start: 25,
+      start: 150,
       earth: true
     }
   ];
@@ -226,11 +227,13 @@
 
     this.destroy = function() {
       container.destroy();
+      bgAudio.pause();
     };
 
     function destroyAsteroid() {
       game.universe.destroy(game.asteroid.physic());
       asteroidGraphics.destroy();
+      bgAudio.pause();
     }
 
     function finishScene() {

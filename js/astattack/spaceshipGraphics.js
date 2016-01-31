@@ -100,14 +100,14 @@
       } else {
         return {
           "moving" : new Animation(sprite, [
-            {duration: 15, x: 0  , y: 0, width: 70, height: 70},
-            {duration: 15, x: 70  , y: 0, width: 70, height: 70},
-            {duration: 15, x: 140  , y: 0, width: 70, height: 70},
-            {duration: 15, x: 210  , y: 0, width: 70, height: 70},
-            {duration: 15, x: 280  , y: 0, width: 70, height: 70},
-            {duration: 15, x: 350  , y: 0, width: 70, height: 70},
-            {duration: 15, x: 420  , y: 0, width: 70, height: 70},
-            {duration: 15, x: 490  , y: 0, width: 70, height: 70}
+            {duration: 10, x: 490 , y: 0, width: 70, height: 70},
+            {duration: 10, x: 420 , y: 0, width: 70, height: 70},
+            {duration: 10, x: 350 , y: 0, width: 70, height: 70},
+            {duration: 10, x: 280 , y: 0, width: 70, height: 70},
+            {duration: 10, x: 210 , y: 0, width: 70, height: 70},
+            {duration: 10, x: 140 , y: 0, width: 70, height: 70},
+            {duration: 10, x: 70  , y: 0, width: 70, height: 70},
+            {duration: 10, x: 0   , y: 0, width: 70, height: 70}
           ]),
 
           "exploding" : new Animation(explodingSprite, [

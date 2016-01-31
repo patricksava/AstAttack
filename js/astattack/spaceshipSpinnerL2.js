@@ -54,7 +54,7 @@
       activeTransitions: { 
         "shootProjectile" : function(){
           var centerX = physic.x+physic.width/2.0
-          var centerY = physic.y+physic.height/2.0;
+          var centerY = physic.y-physic.height/2.0;
           for(var i = 0; i < 5; i++) {
             var shotAngle = angle + i*20;
             var rotVec = angleToVector(shotAngle);

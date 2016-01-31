@@ -31,5 +31,11 @@
    .add("./img/space.jpg")
    .add("./img/earth-light.png")
    .add("./img/earth-fading.png")
+   .add("./img/explosion/boom3.png")
+   .add("./img/explosion/explosion_01_strip13.png")
+   .add("./img/explosion/explosion_01_strip13_small.png")
+   .add("./img/explosion/explosion_01_strip13_medium.png")
+   .add("./img/explosion/explosion_02_strip13.png")
+   .add("./img/explosion/explosion_03_strip13.png")
    .load(gameLoop.start);
 }());

@@ -7,33 +7,57 @@
   var EarthController = LNXAstAttack.EarthController;
   var Config = LNXGames.Config;
   var TIMELINE = [
-    //{
-    //  start: -3,
-    //  frequency: {
-    //    "straight" : 4,
-    //    "double" : 5,
-    //    "spinner" : 4,
-    //    "spinnerl2" : 4
-    //  }
-    //},
-    //{
-    //  start: 10,
-    //  frequency: {
-    //    "straight" : 2,
-    //    "double" : 2.5,
-    //    "spinner" : 3,
-    //    "spinnerl2" : 3.5
-    //  }
-    //},
-    //{
-    //  start: 20,
-    //  frequency: {
-    //    "straight" : 2,
-    //    //"double" : 5
-    //  }
-    //},
     {
-      start: 3,
+      start: -3,
+      frequency: {
+        "straight" : 3,
+        "double" : 10,
+      }
+    },
+    {
+      start: 50,
+      frequency: {
+        "straight" : 3,
+        "double" : 3,
+      }
+    },
+    {
+      start: 100,
+      frequency: {
+        "straight" : 2,
+        "double" : 2,
+        "spinner" : 3
+      }
+    },
+    {
+      start: 150,
+      frequency: {
+        "straight" : 2,
+        "double" : 3,
+        "spinner" : 5,
+        "spinnerl2" : 7
+      }
+    },
+    {
+      start: 200,
+      frequency: {
+        "straight" : 2,
+        "double" : 2,
+        "spinner" : 3,
+        "spinnerl2" : 7
+      }
+    },
+    {
+      start: 250,
+      frequency: {
+        "straight" : 3,
+        "double" : 3,
+        "spinner" : 2,
+        "spinnerl2" : 2
+      }
+    },
+    {
+      start: 300,
       earth: true
     }
   ];

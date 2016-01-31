@@ -54,7 +54,6 @@
 
     this.updateAll = function() {
       for(id in ships) {
-        //console.log("shipController: updateAll");
         ships[id].update();
         var physic = ships[id].physic();
         allGraphics[id].update(physic.x, Config.screenHeight() - physic.y);

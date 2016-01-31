@@ -87,43 +87,7 @@
       {duration: 5, x: 160, y: 120, width: 40, height: 40},
       {duration: 5, x: 200, y: 120, width: 40, height: 40},
       {duration: 5, x: 240, y: 120, width: 40, height: 40},
-      {duration: 5, x: 280, y: 120, width: 40, height: 40},
-
-      {duration: 5, x: 0,   y: 160, width: 40, height: 40},
-      {duration: 5, x: 40,  y: 160, width: 40, height: 40},
-      {duration: 5, x: 80,  y: 160, width: 40, height: 40},
-      {duration: 5, x: 120, y: 160, width: 40, height: 40},
-      {duration: 5, x: 160, y: 160, width: 40, height: 40},
-      {duration: 5, x: 200, y: 160, width: 40, height: 40},
-      {duration: 5, x: 240, y: 160, width: 40, height: 40},
-      {duration: 5, x: 280, y: 160, width: 40, height: 40},
-
-      {duration: 5, x: 0,   y: 200, width: 40, height: 40},
-      {duration: 5, x: 40,  y: 200, width: 40, height: 40},
-      {duration: 5, x: 80,  y: 200, width: 40, height: 40},
-      {duration: 5, x: 120, y: 200, width: 40, height: 40},
-      {duration: 5, x: 160, y: 200, width: 40, height: 40},
-      {duration: 5, x: 200, y: 200, width: 40, height: 40},
-      {duration: 5, x: 240, y: 200, width: 40, height: 40},
-      {duration: 5, x: 280, y: 200, width: 40, height: 40},
-
-      {duration: 5, x: 0,   y: 240, width: 40, height: 40},
-      {duration: 5, x: 40,  y: 240, width: 40, height: 40},
-      {duration: 5, x: 80,  y: 240, width: 40, height: 40},
-      {duration: 5, x: 120, y: 240, width: 40, height: 40},
-      {duration: 5, x: 160, y: 240, width: 40, height: 40},
-      {duration: 5, x: 200, y: 240, width: 40, height: 40},
-      {duration: 5, x: 240, y: 240, width: 40, height: 40},
-      {duration: 5, x: 280, y: 240, width: 40, height: 40},
-
-      {duration: 5, x: 0,   y: 280, width: 40, height: 40},
-      {duration: 5, x: 40,  y: 280, width: 40, height: 40},
-      {duration: 5, x: 80,  y: 280, width: 40, height: 40},
-      {duration: 5, x: 120, y: 280, width: 40, height: 40},
-      {duration: 5, x: 160, y: 280, width: 40, height: 40},
-      {duration: 5, x: 200, y: 280, width: 40, height: 40},
-      {duration: 5, x: 240, y: 280, width: 40, height: 40},
-      {duration: 5, x: 280, y: 280, width: 40, height: 40}
+      {duration: 5, x: 280, y: 120, width: 40, height: 40}
     ];
 
 

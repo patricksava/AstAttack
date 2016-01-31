@@ -14,7 +14,7 @@
         "double" : 10,
       }
     },
-    {
+    /*{
       start: 50,
       frequency: {
         "straight" : 3,
@@ -55,9 +55,9 @@
         "spinner" : 2,
         "spinnerl2" : 2
       }
-    },
+    },*/
     {
-      start: 300,
+      start: 25,
       earth: true
     }
   ];
@@ -80,6 +80,7 @@
     var backgroundI = 0;
     var background1 = null;
     var background2 = null;
+    var bgAudio = null;
 
     var happenings = timelineToShips(TIMELINE);
 
@@ -151,6 +152,9 @@
       hpLabel.x = 0.5;
       hpLabel.y = 0.5;
       container.addChild(hpLabel);
+
+      bgAudio = new Audio("./audio/centroid.ogg");
+      bgAudio.play();
 
       shotController = new ShotController(container, game.universe)
       shipController = new ShipController(container, game.universe, shotController);
@@ -225,6 +229,7 @@
     }
 
     function finishScene() {
+      bgAudio.pause();
       goToScene("ending");
     }
 

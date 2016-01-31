@@ -33,6 +33,8 @@
         
         "exploding" : {
           action: function() {
+            if(physic.vel.x != 0)
+              new Audio("./audio/explode.wav").play();
             physic.velocityX(0);
             physic.velocityY(0);
           },

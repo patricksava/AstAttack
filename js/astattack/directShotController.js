@@ -30,6 +30,10 @@
         self.destroy(id);
       });
 
+      if(x > 0)
+        new Audio("./audio/Longshot.mp3").play();
+
+
       universe.push(shot.physic());
       shot.init();
       shots[id] = shot;
@@ -38,7 +42,6 @@
 
     this.updateAll = function() {
       for(var id in shots) {
-        //console.log("shotController: updateAll");
         shots[id].update();
       }
     };

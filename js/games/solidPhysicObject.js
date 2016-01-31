@@ -53,8 +53,8 @@
       this.vel.y += this.accel.y;
       this.x += this.vel.x;
       this.y += this.vel.y;
-      if(this.x < -200 || this.x > Config.screenWidth() + 200
-          || this.y < -200 || this.y > Config.screenHeight() + 200) {
+      if(this.x < -100 || this.x > Config.screenWidth() + 100
+          || this.y < -100 || this.y > Config.screenHeight() + 100) {
         callbacks.emit("outOfScreen");
       }
     };

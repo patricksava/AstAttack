@@ -53,7 +53,7 @@
       
       activeTransitions: { 
         "shootProjectile" : function(){
-          shotController.create(physic.x-1, physic.y, -SHOT_SPEED, 0, "linear");
+           shotController.create(physic.x-1, physic.y, -SHOT_SPEED, 0, "linear");
         }
       }
     });

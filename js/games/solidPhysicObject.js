@@ -82,19 +82,7 @@
         (topLeftCorner1.x > bottomRightCorner2.x || bottomRightCorner1.x < topLeftCorner2.x) ||
         (topLeftCorner1.y < bottomRightCorner2.y || bottomRightCorner1.y > topLeftCorner2.y);
 
-      if(noCollision) {
-        return null;
-      } else {
-        var weak = this;
-        var fixed = this;
-        if(this.type === "fixed") {
-          weak = obj2;
-        } else {
-          fixed = obj2;
-        }
-
-        return {solidWeakObject: weak, solidFixedObject: fixed}
-      }
+      return !noCollision;
     };
   };
 }(LNXGames = window.LNXGames || {}));

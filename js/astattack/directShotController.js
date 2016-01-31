@@ -38,6 +38,7 @@
 
     this.updateAll = function() {
       for(var id in shots) {
+        //console.log("shotController: updateAll");
         shots[id].update();
       }
     };

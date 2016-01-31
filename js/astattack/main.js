@@ -28,5 +28,6 @@
    .add("./img/yellow_radial.png")
    .add("./img/asteroid_sprite.png")
    .add("./img/earth.png")
+   .add("./img/space.jpg")
    .load(gameLoop.start);
 }());

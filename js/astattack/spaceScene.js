@@ -12,10 +12,10 @@
       frequency: {
         "straight" : 4,
         "double" : 5,
-        "spinner" : 6,
-        "spinnerl2" : 7
+        "spinner" : 6
+        //"spinnerl2" : 7
       }
-    },
+    },/*
     {
       start: 10,
       frequency: {
@@ -31,7 +31,7 @@
         "straight" : 2,
         //"double" : 5
       }
-    },
+    },*/
     {
       start: 30,
       earth: true

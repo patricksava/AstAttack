@@ -29,5 +29,7 @@
    .add("./img/asteroid_sprite.png")
    .add("./img/earth.png")
    .add("./img/space.jpg")
+   .add("./img/earth-light.png")
+   .add("./img/earth-fading.png")
    .load(gameLoop.start);
 }());

@@ -1,5 +1,6 @@
 (function(namespace) {
   var Animation = LNXGames.Animation;
+  var AnimationChain = LNXGames.AnimationChain;
   var Callbacks = LNXCommons.CallbackHelper;
   var Config = LNXGames.Config;
 
@@ -7,15 +8,17 @@
     var callbacks = Callbacks.initializeFor(this);
     var self = this;
     var animation = null;
-    var tex = null;
     var sprite = null;
     var animations = null;
     var animationName = null;
+    var textures = {
+      healthy: PIXI.loader.resources["./img/earth-light.png"].texture.clone(),
+      fading: PIXI.loader.resources["./img/earth-fading.png"].texture.clone()
+    }
 
     function init() {
-      tex = PIXI.loader.resources["./img/earth.png"].texture.clone();
-      sprite = new PIXI.Sprite(tex);
-      var val = Config.screenHeight() / 160.0;
+      sprite = new PIXI.Sprite(textures["healthy"]);
+      var val = Config.screenHeight() / 320.0;
       sprite.scale.x = val;
       sprite.scale.y = val;
       animations = createAnimationsFor(sprite);
@@ -48,65 +51,57 @@
     }
 
     function createAnimationsFor(sprite) {
+      var healthyAnimation = new Animation(sprite, [
+        {duration: 5, x: 426*0, y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*1, y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*2, y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*3, y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*0, y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*1, y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*2, y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*3, y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*0, y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*1, y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*2, y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*3, y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*0, y: 320*3, width: 426, height: 320}
+      ], textures["healthy"]);
+      var fadingAnimation = new Animation(sprite, [
+        {duration: 5, x: 426*0, y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*1, y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*2, y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*3, y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*0, y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*1, y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*2, y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*3, y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*0, y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*1, y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*2, y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*3, y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*0, y: 320*3, width: 426, height: 320}
+      ], textures["fading"])
+      var darkAnimation = new Animation(sprite, [
+        {duration: 5, x: 426*(4+0), y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*(4+1), y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*(4+2), y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*(4+3), y: 320*0, width: 426, height: 320},
+        {duration: 5, x: 426*(4+0), y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*(4+1), y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*(4+2), y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*(4+3), y: 320*1, width: 426, height: 320},
+        {duration: 5, x: 426*(4+0), y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*(4+1), y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*(4+2), y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*(4+3), y: 320*2, width: 426, height: 320},
+        {duration: 5, x: 426*(4+0), y: 320*3, width: 426, height: 320}
+      ], textures["fading"])
+
       return {
-        "alive" : new Animation(sprite, [
-          {duration: 5, x: 213*0, y: 160*0, width: 213, height: 160},
-          {duration: 5, x: 213*1, y: 160*0, width: 213, height: 160},
-          {duration: 5, x: 213*2, y: 160*0, width: 213, height: 160},
-          {duration: 5, x: 213*3, y: 160*0, width: 213, height: 160},
-          {duration: 5, x: 213*0, y: 160*1, width: 213, height: 160},
-          {duration: 5, x: 213*1, y: 160*1, width: 213, height: 160},
-          {duration: 5, x: 213*2, y: 160*1, width: 213, height: 160},
-          {duration: 5, x: 213*3, y: 160*1, width: 213, height: 160},
-          {duration: 5, x: 213*0, y: 160*2, width: 213, height: 160},
-          {duration: 5, x: 213*1, y: 160*2, width: 213, height: 160},
-          {duration: 5, x: 213*2, y: 160*2, width: 213, height: 160},
-          {duration: 5, x: 213*3, y: 160*2, width: 213, height: 160},
-          {duration: 5, x: 213*0, y: 160*3, width: 213, height: 160}
-        ]),
-        "explode" : new Animation(sprite, [
-          {duration: 1, x: 213*0, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*3, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*1, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*1, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*1, width: 200, height: 150},
-          {duration: 1, x: 213*3, y: 160*1, width: 200, height: 150},
-          {duration: 1, x: 213*3, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*1, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*1, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*1, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*3, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*3, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*3, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*0, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*1, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*1, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*1, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*3, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*1, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*2, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*3, y: 160*2, width: 200, height: 150},
-          {duration: 1, x: 213*0, y: 160*3, width: 200, height: 150}
+        "alive" : healthyAnimation,
+        "explode" : new AnimationChain([
+          {animation: fadingAnimation, times: 1},
+          {animation: darkAnimation, times: 5}
         ])
       };
     }

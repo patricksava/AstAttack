@@ -7,6 +7,31 @@
   var EarthController = LNXAstAttack.EarthController;
   var Config = LNXGames.Config;
   var TIMELINE = [
+    //{
+    //  start: -3,
+    //  frequency: {
+    //    "straight" : 4,
+    //    "double" : 5,
+    //    "spinner" : 6,
+    //    "spinnerl2" : 7
+    //  }
+    //},
+    //{
+    //  start: 10,
+    //  frequency: {
+    //    "straight" : 2,
+    //    "double" : 2.5,
+    //    "spinner" : 3,
+    //    "spinnerl2" : 3.5
+    //  }
+    //},
+    //{
+    //  start: 20,
+    //  frequency: {
+    //    "straight" : 2,
+    //    //"double" : 5
+    //  }
+    //},
     {
       start: -3,
       frequency: {

@@ -66,8 +66,8 @@
 
       asteroidGraphics = new AsteroidGraphics(container);
 
-      game.asteroid.listen("stateChange", function(state, directionX, directionY) {
-        asteroidGraphics.changeAnimationToCompatibleWithState(state, directionX, directionY);
+      game.asteroid.listen("stateChange", function(state, directionX, directionY, invencible) {
+        asteroidGraphics.changeAnimationToCompatibleWithState(state, directionX, directionY, invencible);
       });
 
       game.asteroid.listen("shipDestroyed", function(score) {

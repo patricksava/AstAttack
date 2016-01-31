@@ -3,6 +3,7 @@
   var StateMachine = LNXGames.StateMachine;
   var Callbacks = LNXCommons.CallbackHelper;
   var Config = LNXGames.Config;
+  var Timing = LNXCommons.Timing;
 
   var LIFE_POINTS_PER_SHOT = 20;
 
@@ -16,6 +17,8 @@
     var physic = new SolidPhysicObject(x, y, 40, 40, "asteroid");
     var directionX = "";
     var directionY = "";
+    var invencible = false;
+
     var statesMachine = new StateMachine({
       start: "standing",
       states: {
@@ -89,7 +92,8 @@
         "moveUp": function()    { directionY = "up";    isOutOfScreenTop() ? physic.velocityY(Y_SPEED) : physic.velocityY(0); },
         "moveDown": function()  { directionY = "down";  isOutOfScreenBottom() ? physic.velocityY(-1*Y_SPEED) : physic.velocityY(0); },
         "stopX": function()     { directionX = "";      physic.velocityX(0); },
-        "stopY": function()     { directionY = "";      physic.velocityY(0); }
+        "stopY": function()     { directionY = "";      physic.velocityY(0); },
+        "recover": function()   { physic.disable(); invencible = true; Timing.timeout(function(){ invencible = false; physic.enable() }, 3)}
       }
     });
 
@@ -102,7 +106,7 @@
     }
 
     function isOutOfScreenTop() {
-      return physic.y < 600;
+      return physic.y < Config.screenHeight();
     }
 
     function isOutOfScreenBottom() {
@@ -122,7 +126,7 @@
       });
 
       statesMachine.listen("stateChange", function(newState, transition, previousState) {
-        callbacks.emit("stateChange", [newState, directionX, directionY]);
+        callbacks.emit("stateChange", [newState, directionX, directionY, invencible]);
       });
       callbacks.emit("stateChange", [statesMachine.state(), directionX, directionY]);
     }

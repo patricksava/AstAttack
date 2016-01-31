@@ -27,6 +27,8 @@
    .add("./img/pink_radial.png")
    .add("./img/yellow_radial.png")
    .add("./img/asteroid_sprite.png")
+   .add("./img/asteroid_invencible.png")
+   .add("./img/asteroid_hitted.png")
    .add("./img/earth.png")
    .add("./img/space.jpg")
    .add("./img/earth-light.png")

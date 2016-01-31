@@ -71,6 +71,10 @@
       this.disabled = true;
     };
 
+    this.enable = function() {
+      this.disabled = false;
+    };
+
     this.collides = function(obj2) {
       if(this.disabled || obj2.disabled) return false;
       var topLeftCorner1 =     {x: this.x,            y: this.y};

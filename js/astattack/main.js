@@ -29,6 +29,7 @@
    .add("./img/asteroid_sprite.png")
    .add("./img/asteroid_invencible.png")
    .add("./img/asteroid_hitted.png")
+   .add("./img/asteroid_death.png")
    .add("./img/earth.png")
    .add("./img/space.jpg")
    .add("./img/earth-light.png")

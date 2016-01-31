@@ -13,12 +13,13 @@
     var animationName = null;
     var textures = {
       healthy: PIXI.loader.resources["./img/earth-light.png"].texture.clone(),
-      fading: PIXI.loader.resources["./img/earth-fading.png"].texture.clone()
+      fading: PIXI.loader.resources["./img/earth-fading.png"].texture.clone(),
+      sucked: PIXI.loader.resources["./img/earth-sucked.png"].texture.clone()
     }
 
     function init() {
       sprite = new PIXI.Sprite(textures["healthy"]);
-      var val = Config.screenHeight() / 320.0;
+      var val = (Config.screenHeight()*1.1) / 320.0;
       sprite.scale.x = val;
       sprite.scale.y = val;
       animations = createAnimationsFor(sprite);
@@ -52,56 +53,76 @@
 
     function createAnimationsFor(sprite) {
       var healthyAnimation = new Animation(sprite, [
-        {duration: 5, x: 426*0, y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*1, y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*2, y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*3, y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*0, y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*1, y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*2, y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*3, y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*0, y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*1, y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*2, y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*3, y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*0, y: 320*3, width: 426, height: 320}
+        {duration: 10, x: 426*0, y: 320*0, width: 426, height: 320},
+        {duration: 10, x: 426*1, y: 320*0, width: 426, height: 320},
+        {duration: 10, x: 426*2, y: 320*0, width: 426, height: 320},
+        {duration: 10, x: 426*3, y: 320*0, width: 426, height: 320},
+        {duration: 10, x: 426*0, y: 320*1, width: 426, height: 320},
+        {duration: 10, x: 426*1, y: 320*1, width: 426, height: 320},
+        {duration: 10, x: 426*2, y: 320*1, width: 426, height: 320},
+        {duration: 10, x: 426*3, y: 320*1, width: 426, height: 320},
+        {duration: 10, x: 426*0, y: 320*2, width: 426, height: 320},
+        {duration: 10, x: 426*1, y: 320*2, width: 426, height: 320},
+        {duration: 10, x: 426*2, y: 320*2, width: 426, height: 320},
+        {duration: 10, x: 426*3, y: 320*2, width: 426, height: 320},
+        {duration: 10, x: 426*0, y: 320*3, width: 426, height: 320}
       ], textures["healthy"]);
       var fadingAnimation = new Animation(sprite, [
-        {duration: 5, x: 426*0, y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*1, y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*2, y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*3, y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*0, y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*1, y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*2, y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*3, y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*0, y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*1, y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*2, y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*3, y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*0, y: 320*3, width: 426, height: 320}
+        {duration: 10, x: 426*0, y: 320*0, width: 426, height: 320},
+        {duration: 10, x: 426*1, y: 320*0, width: 426, height: 320},
+        {duration: 10, x: 426*2, y: 320*0, width: 426, height: 320},
+        {duration: 10, x: 426*3, y: 320*0, width: 426, height: 320},
+        {duration: 10, x: 426*0, y: 320*1, width: 426, height: 320},
+        {duration: 10, x: 426*1, y: 320*1, width: 426, height: 320},
+        {duration: 10, x: 426*2, y: 320*1, width: 426, height: 320},
+        {duration: 10, x: 426*3, y: 320*1, width: 426, height: 320},
+        {duration: 10, x: 426*0, y: 320*2, width: 426, height: 320},
+        {duration: 10, x: 426*1, y: 320*2, width: 426, height: 320},
+        {duration: 10, x: 426*2, y: 320*2, width: 426, height: 320},
+        {duration: 10, x: 426*3, y: 320*2, width: 426, height: 320},
+        {duration: 10, x: 426*0, y: 320*3, width: 426, height: 320}
       ], textures["fading"])
       var darkAnimation = new Animation(sprite, [
-        {duration: 5, x: 426*(4+0), y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*(4+1), y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*(4+2), y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*(4+3), y: 320*0, width: 426, height: 320},
-        {duration: 5, x: 426*(4+0), y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*(4+1), y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*(4+2), y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*(4+3), y: 320*1, width: 426, height: 320},
-        {duration: 5, x: 426*(4+0), y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*(4+1), y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*(4+2), y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*(4+3), y: 320*2, width: 426, height: 320},
-        {duration: 5, x: 426*(4+0), y: 320*3, width: 426, height: 320}
+        {duration: 10, x: 426*(4+0), y: 320*0, width: 426, height: 320},
+        {duration: 10, x: 426*(4+1), y: 320*0, width: 426, height: 320},
+        {duration: 13, x: 426*(4+2), y: 320*0, width: 426, height: 320},
+        {duration: 17, x: 426*(4+3), y: 320*0, width: 426, height: 320},
+        {duration: 19, x: 426*(4+0), y: 320*1, width: 426, height: 320},
+        {duration: 23, x: 426*(4+1), y: 320*1, width: 426, height: 320},
+        {duration: 29, x: 426*(4+2), y: 320*1, width: 426, height: 320},
+        {duration: 31, x: 426*(4+3), y: 320*1, width: 426, height: 320},
+        {duration: 37, x: 426*(4+0), y: 320*2, width: 426, height: 320},
+        {duration: 41, x: 426*(4+1), y: 320*2, width: 426, height: 320},
+        {duration: 43, x: 426*(4+2), y: 320*2, width: 426, height: 320},
+        {duration: 47, x: 426*(4+3), y: 320*2, width: 426, height: 320},
+        {duration: 63, x: 426*(4+0), y: 320*3, width: 426, height: 320}
       ], textures["fading"])
+      var suckedAnimation = new Animation(sprite, [
+        {duration: 5, x: 434*0, y: 400*0, width: 434, height: 400},
+        {duration: 5, x: 434*1, y: 400*0, width: 434, height: 400},
+        {duration: 5, x: 434*2, y: 400*0, width: 434, height: 400},
+        {duration: 5, x: 434*3, y: 400*0, width: 434, height: 400},
+        {duration: 5, x: 434*0, y: 400*1, width: 434, height: 400},
+        {duration: 5, x: 434*1, y: 400*1, width: 434, height: 400},
+        {duration: 5, x: 434*2, y: 400*1, width: 434, height: 400},
+        {duration: 5, x: 434*3, y: 400*1, width: 434, height: 400},
+        {duration: 5, x: 434*0, y: 400*2, width: 434, height: 400},
+        {duration: 5, x: 434*1, y: 400*2, width: 434, height: 400},
+        {duration: 5, x: 434*2, y: 400*2, width: 434, height: 400},
+        {duration: 5, x: 434*3, y: 400*2, width: 434, height: 400},
+        {duration: 5, x: 434*0, y: 400*3, width: 434, height: 400},
+        {duration: 5, x: 434*1, y: 400*3, width: 434, height: 400},
+        {duration: 5, x: 434*2, y: 400*3, width: 434, height: 400},
+        {duration: 5, x: 434*3, y: 400*3, width: 434, height: 400},
+        {duration: 60, x: 0, y: 0, width: 1, height: 1}
+      ], textures["sucked"])
 
       return {
         "alive" : healthyAnimation,
         "explode" : new AnimationChain([
           {animation: fadingAnimation, times: 1},
-          {animation: darkAnimation, times: 5}
+          {animation: darkAnimation, times: 1},
+          {animation: suckedAnimation, times: 1}
         ])
       };
     }

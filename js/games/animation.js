@@ -15,16 +15,16 @@
       texture.frame = new PIXI.Rectangle(image.x, image.y, image.width, image.height);
       framesOfCurrentImage -= 1;
       if(framesOfCurrentImage <= 0) {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
+        currentImageIndex = currentImageIndex + 1;
+
+        if(currentImageIndex === images.length) {
+          callbacks.emit("animationEnd");
+        }
+        currentImageIndex = currentImageIndex % images.length;
         framesOfCurrentImage = images[currentImageIndex].duration;
       }
       sprite.x = x;
       sprite.y = y;
-
-      if(currentImageIndex === images.length - 1) {
-        currentImageIndex = 0;
-        callbacks.emit("animationEnd");
-      }
     };
 
     this.reset = function() {

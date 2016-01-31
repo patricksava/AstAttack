@@ -18,6 +18,7 @@
    .add("./img/space.jpg")
    .add("./img/earth-light.png")
    .add("./img/earth-fading.png")
+   .add("./img/earth-sucked.png")
    .add("./img/explosion/boom3.png")
    .add("./img/explosion/explosion_01_strip13_small.png")
    .add("./img/explosion/explosion_01_strip13_medium.png")

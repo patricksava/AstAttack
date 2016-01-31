@@ -7,33 +7,33 @@
   var EarthController = LNXAstAttack.EarthController;
   var Config = LNXGames.Config;
   var TIMELINE = [
+    //{
+    //  start: -3,
+    //  frequency: {
+    //    "straight" : 4,
+    //    "double" : 5,
+    //    "spinner" : 4,
+    //    "spinnerl2" : 4
+    //  }
+    //},
+    //{
+    //  start: 10,
+    //  frequency: {
+    //    "straight" : 2,
+    //    "double" : 2.5,
+    //    "spinner" : 3,
+    //    "spinnerl2" : 3.5
+    //  }
+    //},
+    //{
+    //  start: 20,
+    //  frequency: {
+    //    "straight" : 2,
+    //    //"double" : 5
+    //  }
+    //},
     {
-      start: -3,
-      frequency: {
-        "straight" : 4,
-        "double" : 5,
-        "spinner" : 4,
-        "spinnerl2" : 4
-      }
-    },
-    {
-      start: 10,
-      frequency: {
-        "straight" : 2,
-        "double" : 2.5,
-        "spinner" : 3,
-        "spinnerl2" : 3.5
-      }
-    },
-    {
-      start: 20,
-      frequency: {
-        "straight" : 2,
-        //"double" : 5
-      }
-    },
-    {
-      start: 30,
+      start: 3,
       earth: true
     }
   ];
@@ -76,6 +76,7 @@
 
       game.asteroid.listen("earthHitted", function() {
         earthController.hit();
+        destroyAsteroid();
       });
 
       game.asteroid.listen("dead", function() {
@@ -224,14 +225,4 @@
     }
   };
 
-
-  // var SHIPS = {
-  //   "300" : [[900, 200, "straight"]],
-  //   "320" : [[900, 100, "straight"]],
-  //   "340" : [[900, 220, "diagonal_up"]],
-  //   "400" : [[900, 300, "diagonal_up"]],
-  //   "200" : [[900, 300, "diagonal_down"]],
-  //   "400" : [[900, 400, "diagonal_down"]],
-  //   "1400" :  ["earth"]
-  // };
 }(LNXAstAttack = window.LNXAstAttack || {}));

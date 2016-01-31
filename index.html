@@ -6,45 +6,53 @@
     <style>body {margin: 0; padding: 0; background-color: #000;color: white;} a{color: white;}</style>
   </head>
   <body>
-    <script src="/lib/pixi-v3.js"></script>
+    <script src="/lib/pixi-v3.min.js"></script>
 
     <script src="/js/commons/callbackHelper.js"></script>
     <script src="/js/commons/timing.js"></script>
 
     <script src="/js/games/config.js"></script>
-    <script src="/js/games/controls.js"></script>
-    <script src="/js/games/stateMachine.js"></script>
-    <script src="/js/games/animation.js"></script>
-    <script src="/js/games/animationChain.js"></script>
-
-    <script src="/js/games/solidPhysicObject.js"></script>
-    <script src="/js/games/universalPhysic.js"></script>
-
-    <script src="/js/astattack/asteroid.js"></script>
-    <script src="/js/astattack/asteroidGraphics.js"></script>
-
-    <script src="/js/astattack/spaceship.js"></script>
-    <script src="/js/astattack/spaceshipL2.js"></script>
-    <script src="/js/astattack/spaceshipSpinner.js"></script>
-    <script src="/js/astattack/spaceshipSpinnerL2.js"></script>
-    <script src="/js/astattack/shipController.js"></script>
-    <script src="/js/astattack/spaceshipGraphics.js"></script>
-    <script src="/js/astattack/shipController.js"></script>
-
-    <script src="/js/astattack/directShotGraphics.js"></script>
-    <script src="/js/astattack/directShot.js"></script>
-    <script src="/js/astattack/directShotController.js"></script>
-
-    <script src="/js/astattack/earthGraphics.js"></script>
-    <script src="/js/astattack/earth.js"></script>
-    <script src="/js/astattack/earthController.js"></script>
-
-    <script src="/js/astattack/game.js"></script>
-    <script src="/js/astattack/spaceScene.js"></script>
-    <script src="/js/astattack/startScene.js"></script>
-    <script src="/js/astattack/endingScene.js"></script>
-    <script src="/js/astattack/losingScene.js"></script>
+    <script src="/js/astattack/loadingScene.js"></script>
     <script src="/js/astattack/gameLoop.js"></script>
+
+    <script>
+      var JS_SOURCES = [
+        "/js/games/controls.js",
+        "/js/games/stateMachine.js",
+        "/js/games/animation.js",
+        "/js/games/animationChain.js",
+        "/js/games/solidPhysicObject.js",
+        "/js/games/universalPhysic.js",
+
+        "/js/astattack/asteroid.js",
+        "/js/astattack/asteroidGraphics.js",
+
+        "/js/astattack/spaceship.js",
+        "/js/astattack/spaceshipL2.js",
+        "/js/astattack/spaceshipSpinner.js",
+        "/js/astattack/spaceshipSpinnerL2.js",
+        "/js/astattack/shipController.js",
+        "/js/astattack/spaceshipGraphics.js",
+        "/js/astattack/shipController.js",
+
+        "/js/astattack/directShotGraphics.js",
+        "/js/astattack/directShot.js",
+        "/js/astattack/directShotController.js",
+
+        "/js/astattack/earthGraphics.js",
+        "/js/astattack/earth.js",
+        "/js/astattack/earthController.js",
+
+        "/js/astattack/game.js",
+        "/js/astattack/spaceScene.js",
+        "/js/astattack/startScene.js",
+        "/js/astattack/endingScene.js",
+        "/js/astattack/losingScene.js"
+      ];
+    </script>
     <script src="/js/astattack/main.js"></script>
+
+    <script>
+    </script>
   </body>
 </html>

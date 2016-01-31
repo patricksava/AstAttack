@@ -3,19 +3,13 @@
   var Config = LNXGames.Config;
   var Timing = LNXCommons.Timing;
 
-  var SCENES = {
-    "start": LNXAstAttack.StartScene,
-    "space": LNXAstAttack.SpaceScene,
-    "ending": LNXAstAttack.EndingScene,
-    "losing": LNXAstAttack.LosingScene
-  };
-
   namespace.GameLoop = function() {
     var scene = null;
     var container = null;
     var renderer = null;
     var self = this;
     var frameCount = 0;
+    this.progress = 0;
 
     this.start = function() {
       Config.screenSize(800, 600);
@@ -26,7 +20,7 @@
       });
       document.body.appendChild(renderer.view);
 
-      self.startScene(LNXAstAttack.StartScene);
+      self.startScene(LNXAstAttack.LoadingScene);
 
       requestAnimationFrame(self.update);
     };
@@ -45,14 +39,24 @@
 
     this.changeScene = function(sceneName) {
       self.destroyScene();
-      self.startScene(SCENES[sceneName]);
+      self.startScene(getScene(sceneName));
     };
 
     this.update = function() {
       frameCount++;
       requestAnimationFrame(self.update);
-      scene && scene.update(frameCount);
+      scene && scene.update(frameCount, self.progress);
     };
+
+    function getScene(name) {
+      var scenes = {
+        "start": LNXAstAttack.StartScene,
+        "space": LNXAstAttack.SpaceScene,
+        "ending": LNXAstAttack.EndingScene,
+        "losing": LNXAstAttack.LosingScene
+      };
+      return scenes[name];
+    }
   };
 
 }(LNXAstAttack = window.LNXAstAttack || {}));

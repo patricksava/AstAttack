@@ -14,7 +14,7 @@
 
     function init() {
       normalTexture = PIXI.loader.resources["./img/asteroid_sprite.png"].texture;
-      recoveringTexture = PIXI.loader.resources["./img/asteroid_hitted.png"].texture;
+      recoveringTexture = PIXI.loader.resources["./img/asteroid_invencible.png"].texture;
       sprite = new PIXI.Sprite(normalTexture);
       animations = createAnimationsFor(sprite);
       animations["dead"].listen("animationEnd", function() {

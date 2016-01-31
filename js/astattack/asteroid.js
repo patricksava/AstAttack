@@ -6,6 +6,7 @@
   var Timing = LNXCommons.Timing;
 
   var LIFE_POINTS_PER_SHOT = 20;
+  var SECONDS_INVENCIBLE = 1.5
 
   namespace.Asteroid = function(x, y) {
     var callbacks = Callbacks.initializeFor(this);
@@ -93,7 +94,7 @@
         "moveDown": function()  { directionY = "down";  isOutOfScreenBottom() ? physic.velocityY(-1*Y_SPEED) : physic.velocityY(0); },
         "stopX": function()     { directionX = "";      physic.velocityX(0); },
         "stopY": function()     { directionY = "";      physic.velocityY(0); },
-        "recover": function()   { physic.disable(); invencible = true; Timing.timeout(function(){ invencible = false; physic.enable() }, 3)}
+        "recover": function()   { physic.disable(); invencible = true; Timing.timeout(function(){ invencible = false; physic.enable() }, SECONDS_INVENCIBLE)}
       }
     });
 

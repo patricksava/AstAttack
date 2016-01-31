@@ -7,56 +7,6 @@
   var EarthController = LNXAstAttack.EarthController;
   var Config = LNXGames.Config;
   var TIMELINE = [
-    //{
-    //  start: -3,
-    //  frequency: {
-    //    "straight" : 4,
-    //    "double" : 5,
-    //    "spinner" : 6,
-    //    "spinnerl2" : 7
-    //  }
-    //},
-    //{
-    //  start: 10,
-    //  frequency: {
-    //    "straight" : 2,
-    //    "double" : 2.5,
-    //    "spinner" : 3,
-    //    "spinnerl2" : 3.5
-    //  }
-    //},
-    //{
-    //  start: 20,
-    //  frequency: {
-    //    "straight" : 2,
-    //    //"double" : 5
-    //  }
-    //},
-    {
-      start: -3,
-      frequency: {
-        "straight" : 4,
-        "double" : 5,
-        "spinner" : 6
-        //"spinnerl2" : 7
-      }
-    },/*
-    {
-      start: 10,
-      frequency: {
-        "straight" : 2,
-        "double" : 2.5,
-        "spinner" : 3,
-        "spinnerl2" : 3.5
-      }
-    },
-    {
-      start: 20,
-      frequency: {
-        "straight" : 2,
-        //"double" : 5
-      }
-    },*/
     {
       start: 30,
       earth: true
@@ -74,6 +24,7 @@
     var container = null;
     var scoreLabel = null;
     var hpLabel = null;
+    var background = null;
 
     var happenings = timelineToShips(TIMELINE);
 
@@ -122,6 +73,19 @@
         asteroidGraphics.update(this.x-10, Config.screenHeight()-this.y);
       });
 
+      BGWIDTH = 1914;
+      BGHEIGHT = 480;
+      BGSPEED = 3;
+      bgTexture = PIXI.loader.resources["./img/space.jpg"].texture.clone(),
+      bg1 = new PIXI.Sprite(bgTexture);
+      bg2 = new PIXI.Sprite(bgTexture);
+      bg1.x = Config.screenWidth() - 2*BGWIDTH;
+      bg2.x = Config.screenWidth() - BGWIDTH;
+      bg1.y = 0;
+      bg2.y = 0;
+      container.addChildAt(bg1, 0);
+      container.addChildAt(bg2, 0);
+
       scoreLabel = new PIXI.Text("Score: " + game.score + " ", {font : '20px Monospaced', fill : 0xffffff, lineHeight: 30});
       scoreLabel.anchor.x = 1.0;
       scoreLabel.anchor.y = 0.0;
@@ -143,6 +107,17 @@
     };
 
     this.update = function(frameCount) {
+      if(bg1.x+BGSPEED > BGWIDTH - Config.screenWidth()) {
+        bg1.x = Config.screenWidth() - 2*BGWIDTH;
+      } else {
+        bg1.x += BGSPEED;
+      }
+      if(bg2.x+BGSPEED > BGWIDTH - Config.screenWidth()) {
+        bg2.x = Config.screenWidth() - 2*BGWIDTH;
+      } else {
+        bg2.x += BGSPEED;
+      }
+
       var happening = happenings[frameCount];
       if(happening) {
         if(happening === "earth") {

@@ -31,7 +31,7 @@
       });
 
       if(x > 0)
-        new Audio("./audio/Longshot.mp3").play();
+        Config.play("shot");
 
 
       universe.push(shot.physic());

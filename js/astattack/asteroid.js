@@ -59,7 +59,7 @@
 
         "hit" : {
           action: function() {
-            new Audio("./audio/glass_breaking.wav").play();
+            Config.play("hit");
             healthPoints = healthPoints - LIFE_POINTS_PER_SHOT; 
             if(healthPoints <= 0){
               statesMachine.applyTransition("die");

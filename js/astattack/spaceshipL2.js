@@ -2,6 +2,7 @@
   var SolidPhysicObject = LNXGames.SolidPhysicObject;
   var StateMachine = LNXGames.StateMachine;
   var Callbacks = LNXCommons.CallbackHelper;
+  var Config = LNXGames.Config;
 
   namespace.SpaceshipL2 = function(x, y, shotCont) {
     var callbacks = Callbacks.initializeFor(this);
@@ -35,7 +36,7 @@
         "exploding" : {
           action: function() {
             if(physic.vel.x != 0)
-              new Audio("./audio/explode.wav").play();
+              Config.play("explode");
             physic.velocityX(0);
             physic.velocityY(0);
           },

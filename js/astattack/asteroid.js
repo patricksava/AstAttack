@@ -122,6 +122,7 @@
         } else if(obj.type === "shot"){
           statesMachine.applyTransition("hitByProjectile");
         } else if(obj.type === "earth"){
+          physic.disable();
           callbacks.emit("earthHitted");
         }
       });

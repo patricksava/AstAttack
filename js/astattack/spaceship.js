@@ -10,7 +10,7 @@
     var X_SPEED = -3;
     var Y_SPEED = 0;
     var SHOT_SPEED = 6;
-    var physic = new SolidPhysicObject(x, y, 40, 45, "ship");
+    var physic = new SolidPhysicObject(x, y, 40, 45, "ship-10");
     var tick = 0;
     var statesMachine = new StateMachine({
       start: "moving",

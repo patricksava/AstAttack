@@ -11,7 +11,7 @@
     var Y_SPEED = 0;
     var SHOT_SPEED = 6;
     var angle = 180;
-    var physic = new SolidPhysicObject(x, y, 70, 70, "ship");
+    var physic = new SolidPhysicObject(x, y, 70, 70, "ship-50");
     var statesMachine = new StateMachine({
       start: "moving",
 

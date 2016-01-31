@@ -111,10 +111,11 @@
 
     this.init = function() {
       physic.listen("collision", function(obj) {
-        if(obj.type === "shot"){
+        var shipMatch = obj.type.match(/^ship-(\d+)/);
+        if(shipMatch) {
+          callbacks.emit("shipDestroyed", [parseFloat(shipMatch[1])]);
+        } else if(obj.type === "shot"){
           statesMachine.applyTransition("hitByProjectile");
-        } else if(obj.type === "ship"){
-          callbacks.emit("shipDestroyed");
         } else if(obj.type === "earth"){
           callbacks.emit("earthHitted");
         }

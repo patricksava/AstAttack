@@ -12,8 +12,8 @@
       frequency: {
         "straight" : 4,
         "double" : 5,
-        "spinner" : 6,
-        "spinnerl2" : 7
+        "spinner" : 4,
+        "spinnerl2" : 4
       }
     },
     {
@@ -70,8 +70,8 @@
         asteroidGraphics.changeAnimationToCompatibleWithState(state, directionX, directionY);
       });
 
-      game.asteroid.listen("shipDestroyed", function() {
-        game.score = game.score + 20;
+      game.asteroid.listen("shipDestroyed", function(score) {
+        game.score += score;
       });
 
       game.asteroid.listen("earthHitted", function() {
@@ -101,7 +101,7 @@
       }
 
       game.asteroid.physic().listen("update", function() {
-        asteroidGraphics.update(this.x-10, Config.screenHeight()-this.y);
+        asteroidGraphics.update(this.x, Config.screenHeight()-this.y);
       });
 
       var bgTexture = PIXI.loader.resources["./img/space.jpg"].texture.clone(),

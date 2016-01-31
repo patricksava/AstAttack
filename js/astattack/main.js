@@ -2,6 +2,8 @@
   gameLoop = new LNXAstAttack.GameLoop();
   PIXI.loader
    .add("./img/welcome_screen_2.jpg")
+   .add("./img/youlose_screen.png")
+   .add("./img/youwon_screen.png")
    .add("./img/spaceship.pod.1.small.red.png")
    .add("./img/spaceship.pod.1.small.blue.png")
    .add("./img/spaceship.pod.1.small.yellow.png")

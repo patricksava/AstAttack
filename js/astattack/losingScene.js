@@ -10,19 +10,8 @@
 
     this.start = function() {
       container = new PIXI.Container();
-      var back = new PIXI.Graphics();
-      back.beginFill(0x101010);
-      back.drawRect(0, 0, Config.screenWidth(), Config.screenHeight());
-      back.endFill();
-
-
-      var text = new PIXI.Text("The poor asteroid could not destroy earth. :(\n\nPress enter to restart.", {font : '34px Monospaced', fill : 0xffffff, align: "center", lineHeight: 60});
-      text.anchor.x = 0.5;
-      text.anchor.y = 0.5;
-      text.x = Config.screenWidth() / 2.0;
-      text.y = Config.screenHeight() / 2.0;
+      var back = new PIXI.Sprite(PIXI.loader.resources["./img/youlose_screen.png"].texture.clone());
       container.addChild(back);
-      container.addChild(text);
     };
 
     this.update = function(frameCount) {

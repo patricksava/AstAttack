@@ -8,6 +8,8 @@
     var callbacks = Callbacks.initializeFor(this);
     var myself = this;
     var physic = new SolidPhysicObject(x, Config.screenHeight(), Config.screenWidth(), Config.screenHeight(), "earth");
+    var loops = 0;
+    var expAudio = null;
     var statesMachine = new StateMachine({
       start: "alive",
       states: {
@@ -22,6 +24,18 @@
         },
         "explode" : {
           action: function() {
+            if(expAudio == null){
+              expAudio = new Audio("./audio/long_explosion.mp3");
+              expAudio.addEventListener('ended', function() {
+                if(loops < 2){
+                  this.currentTime = 0;
+                  this.play();
+                  loops ++;
+                }
+              }, false);
+              expAudio.play();
+              loops ++;
+            }
             physic.velocityX(0);
             physic.velocityY(0);
           },

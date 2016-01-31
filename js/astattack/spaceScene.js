@@ -154,6 +154,11 @@
       container.addChild(hpLabel);
 
       bgAudio = new Audio("./audio/centroid.ogg");
+      
+      bgAudio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+      }, false);
       bgAudio.play();
 
       shotController = new ShotController(container, game.universe)

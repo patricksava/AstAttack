@@ -6,6 +6,8 @@
   var ShotController = LNXAstAttack.DirectShotController;
   var EarthController = LNXAstAttack.EarthController;
   var Config = LNXGames.Config;
+  var Hud = LNXAstAttack.Hud;
+
   var TIMELINE = [
     {
       start: -3,
@@ -76,17 +78,17 @@
     var shotController = null;
     var earthController = null;
     var container = null;
-    var scoreLabel = null;
-    var hpLabel = null;
     var backgroundI = 0;
     var background1 = null;
     var background2 = null;
     var bgAudio = null;
+    var hud = null;
 
     var happenings = timelineToShips(TIMELINE);
 
     this.start = function() {
       container = new PIXI.Container();
+      hud = new Hud();
 
       game = new Game(container);
 
@@ -131,6 +133,8 @@
         asteroidGraphics.update(this.x, Config.screenHeight()-this.y);
       });
 
+      hud.addTo(container);
+
       var bgTexture = PIXI.loader.resources["./img/space.jpg"].texture.clone(),
       backgroundI = 0;
       background1 = new PIXI.Sprite(bgTexture);
@@ -139,20 +143,6 @@
       background2.y = 0;
       container.addChildAt(background1, 0);
       container.addChildAt(background2, 0);
-
-      scoreLabel = new PIXI.Text("Score: " + game.score + " ", {font : '20px Monospaced', fill : 0xffffff, lineHeight: 30});
-      scoreLabel.anchor.x = 1.0;
-      scoreLabel.anchor.y = 0.0;
-      scoreLabel.x = Config.screenWidth();
-      scoreLabel.y = 0;
-      container.addChild(scoreLabel);
-
-      hpLabel = new PIXI.Text("HP: " + game.asteroid.healthPoints() + "/" + game.asteroid.maxHP(), {font : '20px Monospaced', fill : 0xffffff, lineHeight: 30});
-      hpLabel.anchor.x = 0.0;
-      hpLabel.anchor.y = 0.0;
-      hpLabel.x = 0.5;
-      hpLabel.y = 0.5;
-      container.addChild(hpLabel);
 
       bgAudio = new Audio("./audio/Centroid.ogg");
       
@@ -188,8 +178,8 @@
       shotController.updateAll();
       earthController.update();
 
-      scoreLabel.text = "Score: " + game.score + " ";
-      hpLabel.text = "HP: " + game.asteroid.healthPoints() + "/" + game.asteroid.maxHP();
+      hud.updateScore(game.score);
+      hud.updateHP(game.asteroid.healthPoints(), game.asteroid.maxHP());
 
       var noMoves = true;
       if(Controls.isPressed("right")) {

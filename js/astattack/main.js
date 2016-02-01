@@ -32,6 +32,10 @@
      .add("./img/explosion/boom3.png")
      .add("./img/explosion/explosion_01_strip13_small.png")
      .add("./img/explosion/explosion_01_strip13_medium.png")
+     .add("./img/lifesHUDBack.png")
+     .add("./img/lifesHUDFront.png")
+     .add("./img/scoreHUD.png")
+     .add("./img/lifesHUD.png")
      .on("progress", function(progress) {
        lastResProgress = progress.progress;
        gameLoop.progress = (progress.progress + jsloader.progress())/2;

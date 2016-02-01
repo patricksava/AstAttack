@@ -30,12 +30,20 @@
       container.addChild(scorePoints);
       container.addChild(scoreLabel);
 
-      hpLabel = new PIXI.Text({font : '20px Monospaced', fill : 0xffffff, lineHeight: 30});
-      hpLabel.anchor.x = 0.0;
-      hpLabel.anchor.y = 0.0;
-      hpLabel.x = 0.5;
-      hpLabel.y = 0.5;
-      container.addChild(hpLabel);
+      healthBack = new PIXI.Sprite(PIXI.loader.resources["./img/lifesHUD.png"].texture);
+      healthPtsBack = new PIXI.Sprite(PIXI.loader.resources["./img/lifesHUDBack.png"].texture);
+      healthPtsFront = new PIXI.Sprite(PIXI.loader.resources["./img/lifesHUDFront.png"].texture);
+
+      healthBack.x = 20;
+      healthBack.y = 20;
+      healthPtsBack.x = 20;
+      healthPtsBack.y = 20;
+      healthPtsFront.x = 20;
+      healthPtsFront.y = 20;
+
+      container.addChild(healthBack);
+      container.addChild(healthPtsBack);
+      container.addChild(healthPtsFront);
     };
 
     this.updateScore = function(score) {
@@ -43,7 +51,9 @@
     };
 
     this.updateHP = function(health, maxHealth) {
-      hpLabel.text = "HP: " + health + "/" + maxHealth;
+      var lifes = health / 20;
+      var maxLifes = maxHealth / 20;
+      healthPtsFront.texture.frame = new PIXI.Rectangle(0, 0, 35+lifes*(healthPtsBack.width-70)/maxLifes, healthPtsBack.height);
     };
   };
 

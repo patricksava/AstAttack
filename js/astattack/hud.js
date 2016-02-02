@@ -9,7 +9,7 @@
     this.addTo = function(container) {
       scoreBack = new PIXI.Sprite(PIXI.loader.resources["./img/scoreHUD.png"].texture);
       scorePoints = new PIXI.Text("", {font : '26px Charybdis', fill : 0xffffff});
-      scoreLabel = new PIXI.Text("Score", {font : '17px Charybdis', fill : 0xff6622});
+      scoreLabel = new PIXI.Text("Score", {font : '17px Charybdis', fill : 0xcc4411});
 
       scoreBack.anchor.x = 0.5;
       scoreBack.anchor.y = 0.5;
@@ -33,6 +33,7 @@
       healthBack = new PIXI.Sprite(PIXI.loader.resources["./img/lifesHUD.png"].texture);
       healthPtsBack = new PIXI.Sprite(PIXI.loader.resources["./img/lifesHUDBack.png"].texture);
       healthPtsFront = new PIXI.Sprite(PIXI.loader.resources["./img/lifesHUDFront.png"].texture);
+      healthLabel = new PIXI.Text("Lifes", {font : '17px Charybdis', fill : 0xcc4411});
 
       healthBack.x = 20;
       healthBack.y = 20;
@@ -40,10 +41,13 @@
       healthPtsBack.y = 20;
       healthPtsFront.x = 20;
       healthPtsFront.y = 20;
+      healthLabel.x = 40;
+      healthLabel.y = 15;
 
       container.addChild(healthBack);
       container.addChild(healthPtsBack);
       container.addChild(healthPtsFront);
+      container.addChild(healthLabel);
     };
 
     this.updateScore = function(score) {

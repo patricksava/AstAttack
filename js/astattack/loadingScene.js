@@ -31,7 +31,7 @@
       if(started) {
         rectangle.width = progress/100 * 412;
         renderer.render(container);
-        if(progress >= 99.8) {
+        if(progress >= 97.8) {
           goToScene("start");
         }
       }

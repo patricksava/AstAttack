@@ -26,6 +26,8 @@
      .add("./img/asteroid_invencible.png")
      .add("./img/asteroid_death.png")
      .add("./img/space.jpg")
+     .add("./img/space_galaxy.png")
+     .add("./img/space_stars.jpg")
      .add("./img/earth-light.png")
      .add("./img/earth-fading.png")
      .add("./img/earth-sucked.png")

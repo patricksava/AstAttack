@@ -7,6 +7,7 @@
   var EarthController = LNXAstAttack.EarthController;
   var Config = LNXGames.Config;
   var Hud = LNXAstAttack.Hud;
+  var Background = LNXAstAttack.Background;
 
   var TIMELINE = [
     {
@@ -65,10 +66,6 @@
     }
   ];
 
-  var BGWIDTH = 2393;
-  var BGHEIGHT = 600;
-  var BGSPEED = -3;
-
   namespace.SpaceScene = function(renderer, goToScene) {
     var self = this;
     var game = null;
@@ -78,17 +75,16 @@
     var shotController = null;
     var earthController = null;
     var container = null;
-    var backgroundI = 0;
-    var background1 = null;
-    var background2 = null;
     var bgAudio = null;
     var hud = null;
+    var background = null;
 
     var happenings = timelineToShips(TIMELINE);
 
     this.start = function() {
       container = new PIXI.Container();
       hud = new Hud();
+      background = new Background();
 
       game = new Game(container);
 
@@ -134,15 +130,7 @@
       });
 
       hud.addTo(container);
-
-      var bgTexture = PIXI.loader.resources["./img/space.jpg"].texture.clone(),
-      backgroundI = 0;
-      background1 = new PIXI.Sprite(bgTexture);
-      background2 = new PIXI.Sprite(bgTexture);
-      background1.y = 0;
-      background2.y = 0;
-      container.addChildAt(background1, 0);
-      container.addChildAt(background2, 0);
+      background.addTo(container);
 
       bgAudio = new Audio("./audio/Centroid.ogg");
       
@@ -159,10 +147,6 @@
     };
 
     this.update = function(frameCount) {
-      backgroundI = (backgroundI + BGSPEED) % BGWIDTH;
-      background1.x = backgroundI;
-      background2.x = backgroundI + BGWIDTH;
-
       var happening = happenings[frameCount];
       if(happening) {
         if(happening === "earth") {
@@ -180,6 +164,7 @@
 
       hud.updateScore(game.score);
       hud.updateHP(game.asteroid.healthPoints(), game.asteroid.maxHP());
+      background.update();
 
       var noMoves = true;
       if(Controls.isPressed("right")) {

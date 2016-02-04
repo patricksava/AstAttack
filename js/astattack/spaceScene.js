@@ -8,6 +8,7 @@
   var Config = LNXGames.Config;
   var Hud = LNXAstAttack.Hud;
   var Background = LNXAstAttack.Background;
+  var Animation = LNXGames.Animation;
 
   var TIMELINE = [
     {
@@ -96,6 +97,7 @@
 
       game.asteroid.listen("shipDestroyed", function(score) {
         game.score += score;
+        container.addChild(Animation.textAnimation("+"+score, game.asteroid.x, Config.screenHeight() - game.asteroid.y));
       });
 
       game.asteroid.listen("earthHitted", function() {
@@ -147,6 +149,7 @@
     };
 
     this.update = function(frameCount) {
+      Animation.update();
       var happening = happenings[frameCount];
       if(happening) {
         if(happening === "earth") {

@@ -1,13 +1,13 @@
 (function(namespace) {
   var Config = LNXGames.Config;
 
-  var FRONT_PLANET_SPRITES = [];
-  (function() {
-    var textures = PIXI.loader.resources["./img/frontPlanets.json"].textures;
-    for(var path in textures) {
-      FRONT_PLANET_SPRITES.push(new PIXI.Sprite(textures[path]));
-    }
-  }());
+  //var FRONT_PLANET_SPRITES = [];
+  //(function() {
+  //  var textures = PIXI.loader.resources["./img/frontPlanets.json"].textures;
+  //  for(var path in textures) {
+  //    FRONT_PLANET_SPRITES.push(new PIXI.Sprite(textures[path]));
+  //  }
+  //}());
 
   var BACK_PLANET_SPRITES = [];
   (function() {
@@ -29,6 +29,7 @@
     var bg1 = null;
     var bg2 = null;
     var bg3 = null;
+    var bg4 = null;
 
     this.addTo = function(container) {
       var bg1tex = PIXI.loader.resources["./img/space_stars.jpg"].texture.clone();
@@ -37,7 +38,7 @@
       bg2 = new SimpleBackground(2312, 600, -5.4, bg2tex);
       bg3 = new ObjectsBackground(BACK_BACK_PLANET_SPRITES, -0.8, Config.screenWidth(), Config.screenHeight(), 0.5, 10);
       bg4 = new ObjectsBackground(BACK_PLANET_SPRITES, -2.5, Config.screenWidth(), Config.screenHeight(), 2, 15);
-      bg5 = new ObjectsBackground(FRONT_PLANET_SPRITES, -3.5, Config.screenWidth(), Config.screenHeight(), 10, 30);
+      //bg5 = new ObjectsBackground(FRONT_PLANET_SPRITES, -3.5, Config.screenWidth(), Config.screenHeight(), 10, 30);
       bg2.addTo(container, 0);
       //bg5.addTo(container, 0);
       bg4.addTo(container, 0);
@@ -50,7 +51,7 @@
       bg2.update();
       bg3.update();
       bg4.update();
-      bg5.update();
+      //bg5.update();
     };
   };
 

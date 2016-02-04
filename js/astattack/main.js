@@ -19,7 +19,7 @@
      .add("./img/spaceship.pod.1.small.yellow.png")
      .add("./img/spinner.png")
      .add("./img/spinnerl2.png")
-     .add("./img/frontPlanets.json")
+     //.add("./img/frontPlanets.json")
      .add("./img/backPlanets.json")
      .add("./img/backBackPlanets.json")
      .add("./img/red_ball.png")

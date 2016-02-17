@@ -12,7 +12,7 @@
     this.progress = 0;
 
     this.start = function() {
-      Config.screenSize(800, 600);
+      Config.screenSize(window.innerWidth, window.innerHeight);
       frameCount = 0;
 
       renderer = PIXI.autoDetectRenderer(Config.screenWidth(), Config.screenHeight(), {

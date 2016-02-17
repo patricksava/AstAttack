@@ -217,7 +217,7 @@
     function onAccelSuccess(acceleration) {
       var accX = Config.refAccelX() - acceleration.x;
       var accY = acceleration.y - Config.refAccelY();
-      var boost = 3;
+      
       console.log("pre acceleration x = " + accX);
       console.log("pre acceleration y = " + accY);
 
@@ -231,7 +231,7 @@
       else
         accY = Math.max(Config.minAccel(), accY);
 
-      game.asteroid.move(boost*accY, boost*accX);             
+      game.asteroid.move(Config.speedBoost()*accY, Config.speedBoost()*accX);             
     };
 
     function onAccelError() {

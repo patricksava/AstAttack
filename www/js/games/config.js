@@ -32,6 +32,7 @@
     var refAccelY = 0.0;
     var maxAccel = 2.5;
     var minAccel = -2.5;
+    var speedBoost = 3.0;
 
     this.screenWidth = function() {
       return screenWidth;
@@ -55,6 +56,10 @@
 
     this.minAccel = function() {
       return minAccel;
+    };
+
+    this.speedBoost = function() {
+      return speedBoost;
     };
 
     this.screenSize = function(width, height) {

@@ -36,7 +36,8 @@
             "moveLeft": "moving",
             "moveRight": "moving",
             "moveUp": "moving",
-            "moveDown": "moving"
+            "moveDown": "moving",
+            "move": "moving"
           }
         },
         "standing" : {
@@ -53,7 +54,8 @@
             "moveLeft": "moving",
             "moveRight": "moving",
             "moveUp": "moving",
-            "moveDown": "moving"
+            "moveDown": "moving",
+            "move": "moving"
           }
         },
 
@@ -68,7 +70,7 @@
             }
           },
           transitions: {
-            "recover" : "standing",
+            "recover" : "moving",
             "die" : "dead"
           }
         },
@@ -89,6 +91,7 @@
       ],
       
       activeTransitions: {
+        "move": function() { },
         "moveRight": function() { directionX = "right"; isOutOfScreenRight() ? physic.velocityX(X_SPEED) : physic.velocityX(0);},
         "moveLeft": function()  { directionX = "left";  isOutOfScreenLeft() ? physic.velocityX(-1*X_SPEED) : physic.velocityX(0); },
         "moveUp": function()    { directionY = "up";    isOutOfScreenTop() ? physic.velocityY(Y_SPEED) : physic.velocityY(0); },
@@ -143,7 +146,7 @@
     };
 
     this.move = function(accelX, accelY) {
-      statesMachine.applyTransition("moving");
+      statesMachine.applyTransition("move");
 
       if(accelX + physic.getVelocityX() > 0)
         directionX = "right";
@@ -160,21 +163,20 @@
       else if(accelX < 0 && !isOutOfScreenLeft())
         physic.velocityX(0);
       else
-        physic.accelerateX(accelX);
+        physic.velocityX(accelX);
 
       if(accelY > 0 && !isOutOfScreenTop())
         physic.velocityY(0);
       else if(accelY < 0 && !isOutOfScreenBottom())
         physic.velocityY(0);
       else
-        physic.accelerateY(accelY);
+        physic.velocityY(accelY);
 
       console.log("Speed X -> " + physic.getVelocityX());
       console.log("Speed Y -> " + physic.getVelocityY());
     }
 
     this.physic = function(){ return physic; };
-
     this.healthPoints = function(){ return healthPoints; };
     this.maxHP = function(){ return maxHP; };
   };

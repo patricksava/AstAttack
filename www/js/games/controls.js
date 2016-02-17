@@ -35,7 +35,7 @@
     window.addEventListener("touchend", function(event) {
       event.preventDefault();
       computeUnpress('13');
-      var touch = event.changedTouches[0];
+      var touch = event.changedTouches   [0];
 
       if(touch.pageX > 530) {     
         computeUnpress('39');

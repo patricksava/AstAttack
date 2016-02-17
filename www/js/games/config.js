@@ -28,12 +28,33 @@
     var screenWidth = 0;
     var screenHeight = 0;
 
+    var refAccelX = 7.5;
+    var refAccelY = 0.0;
+    var maxAccel = 2.5;
+    var minAccel = -2.5;
+
     this.screenWidth = function() {
       return screenWidth;
     };
 
     this.screenHeight = function() {
       return screenHeight;
+    };
+
+    this.refAccelX = function() {
+      return refAccelX;
+    };
+
+    this.refAccelY = function() {
+      return refAccelY;
+    };
+
+    this.maxAccel = function() {
+      return maxAccel;
+    };
+
+    this.minAccel = function() {
+      return minAccel;
     };
 
     this.screenSize = function(width, height) {

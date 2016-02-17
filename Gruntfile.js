@@ -73,6 +73,7 @@ module.exports = function(grunt) {
             'geolocation',
             'network-information',
             'splashscreen',
+            'device-motion',
             'https://github.com/phonegap-build/PushPlugin.git'
           ]
         }

@@ -78,6 +78,7 @@
     var bgAudio = null;
     var hud = null;
     var background = null;
+    var accelWatcher = null;
 
     var happenings = timelineToShips(TIMELINE);
 
@@ -143,6 +144,9 @@
       shotController = new ShotController(container, game.universe)
       shipController = new ShipController(container, game.universe, shotController);
       earthController = new EarthController(container, game.universe);
+
+      accelWatcher = navigator.accelerometer.watchAcceleration(onAccelSuccess, onAccelError, { frequency: 50 });
+
       game.init();
     };
 
@@ -165,7 +169,7 @@
       hud.updateScore(game.score);
       hud.updateHP(game.asteroid.healthPoints(), game.asteroid.maxHP());
       background.update();
-
+      /*
       var noMoves = true;
       if(Controls.isPressed("right")) {
         noMoves = false;
@@ -189,9 +193,10 @@
       if(Controls.wasReleased("down") || Controls.wasReleased("up")) {
         game.asteroid.act("stopY");
       }
+      
       if(noMoves)
         game.asteroid.act("stop");
-
+      */
       game.update();
       renderer.render(container);
 
@@ -203,6 +208,34 @@
     this.destroy = function() {
       container.destroy();
       bgAudio.pause();
+      if (accelWatcher) {
+        navigator.accelerometer.clearWatch(accelWatcher);
+        accelWatcher = null;
+      }
+    };
+
+    function onAccelSuccess(acceleration) {
+      var accX = Config.refAccelX() - acceleration.x;
+      var accY = acceleration.y - Config.refAccelY();
+      var boost = 3;
+      console.log("pre acceleration x = " + accX);
+      console.log("pre acceleration y = " + accY);
+
+      if(accX > 0)
+        accX = Math.min(Config.maxAccel(), accX);
+      else
+        accX = Math.max(Config.minAccel(), accX);
+
+      if(accY > 0)
+        accY = Math.min(Config.maxAccel(), accY);
+      else
+        accY = Math.max(Config.minAccel(), accY);
+
+      game.asteroid.move(boost*accY, boost*accX);             
+    };
+
+    function onAccelError() {
+      console.log("Accel Error");
     };
 
     function destroyAsteroid() {

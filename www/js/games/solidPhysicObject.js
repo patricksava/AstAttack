@@ -23,6 +23,22 @@
       this.vel.y = newY;
     };
 
+    this.getVelocityX = function() {
+      return this.vel.x;
+    };
+
+    this.getVelocityY = function() {
+      return this.vel.y;
+    };
+
+    this.accelerateX = function(newX) {
+      this.vel.x = this.vel.x + newX;
+    };
+
+    this.accelerateY = function(newY) {
+      this.vel.y = this.vel.y + newY;
+    };
+
     this.noForcesX = function() {
       this.accel.x = 0;
     };

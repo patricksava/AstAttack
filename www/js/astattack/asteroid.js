@@ -142,6 +142,37 @@
       statesMachine.executeCurrentState();
     };
 
+    this.move = function(accelX, accelY) {
+      statesMachine.applyTransition("moving");
+
+      if(accelX + physic.getVelocityX() > 0)
+        directionX = "right";
+      else
+        directionX = "left";
+
+      if(accelY + physic.getVelocityY() > 0)
+        directionY = "up";
+      else
+        directionY = "down";
+
+      if(accelX > 0 && !isOutOfScreenRight())
+        physic.velocityX(0);
+      else if(accelX < 0 && !isOutOfScreenLeft())
+        physic.velocityX(0);
+      else
+        physic.accelerateX(accelX);
+
+      if(accelY > 0 && !isOutOfScreenTop())
+        physic.velocityY(0);
+      else if(accelY < 0 && !isOutOfScreenBottom())
+        physic.velocityY(0);
+      else
+        physic.accelerateY(accelY);
+
+      console.log("Speed X -> " + physic.getVelocityX());
+      console.log("Speed Y -> " + physic.getVelocityY());
+    }
+
     this.physic = function(){ return physic; };
 
     this.healthPoints = function(){ return healthPoints; };

@@ -195,9 +195,9 @@
       game.update();
       renderer.render(container);
 
-      if(Controls.wasReleased("enter")) {
+      /*if(Controls.wasReleased("enter")) {
         goToScene("start");
-      }
+      }*/
     };
 
     this.destroy = function() {
